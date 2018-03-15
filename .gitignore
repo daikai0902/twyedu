@@ -40,7 +40,6 @@ app/japidviews/*/*/*/*.java
 
 # everyone should keep their own conf files
 conf/application.conf
-lib/*
 modules/*
 cobertura.*
 bin

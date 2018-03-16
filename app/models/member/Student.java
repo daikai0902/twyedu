@@ -29,13 +29,13 @@ public class Student extends WePerson {
 
 
 
-	public static Student signup(String name,Integer age,boolean sex,String clothsize,String shoessize,String momname,
+	public static Student signup(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
 									String momphone,String dadname,String dadphone,String nursery,String address,String course,String remark){
 
 		Student student = new Student();
 		student.name = name;
 		student.age = age;
-		student.sex =sex;
+		student.sex = sex.equals("男孩")?false:true;
 		student.clothsize = clothsize;
 		student.shoessize = shoessize;
 		student.momname = momname;

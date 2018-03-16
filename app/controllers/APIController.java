@@ -31,14 +31,14 @@ public class APIController extends JapidController{
 
 
 
-    /**
-     * 增加网点
-     * @Date: 22:15 2018/3/15
-     */
-    public static void addOrg(String groupName,String address,String telphone){
-        OrganizeGroup.addGroup(groupName,address,telphone);
-        renderJSON(Result.succeed());
-    }
+//    /**
+//     * 增加网点
+//     * @Date: 22:15 2018/3/15
+//     */
+//    public static void addOrg(String groupName,String address,String telphone){
+//        OrganizeGroup.addGroup(groupName,address,telphone);
+//        renderJSON(Result.succeed());
+//    }
 
 
 

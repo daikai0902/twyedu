@@ -1,11 +1,12 @@
 package models;
 
 import models.member.Student;
+import models.member.SysAdmin;
 import models.member.Teacher;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class WePerson extends BaseModel {
@@ -31,17 +32,20 @@ public class WePerson extends BaseModel {
 	public WeChatMember wMember;
 
 
-
-
-
-
-
-	public static List<WePerson> fetchPersonsByIds(List<Long> personIds) {
-		return WePerson.find("select wp from WePerson wp where wp.id in (:personIds) ")
-				.bind("personIds", personIds.toArray()).fetch();
+	public void eidtPwd(String password){
+		this.password = DigestUtils.md5Hex(password);
+		this.save();
 	}
 
 
+
+	public static WePerson findByName(String name){
+		return WePerson.find(getDefaultContitionSql(" name = ? "),name).first();
+	}
+
+	public static WePerson findByPhone(String cellPhone){
+		return WePerson.find(getDefaultContitionSql(" cellPhone = ? "),cellPhone).first();
+	}
 
 	public static boolean isPhoneAvailable(String cellPhone) {
 		return StringUtils.isNotBlank(cellPhone)
@@ -49,10 +53,6 @@ public class WePerson extends BaseModel {
 				&& WePerson.count(getDefaultContitionSql("cellPhone=?"), cellPhone) == 0;
 	}
 
-	public static boolean isEmailAvailable(String emailAddress) {
-		return emailAddress.matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9]+(.[a-zA-Z]{2,4}){1,4}")
-				&& WePerson.count(getDefaultContitionSql("lower(email)=lower(?)"), emailAddress) == 0;
-	}
 
 	public boolean isStudent() {
 		return this instanceof Student;
@@ -62,9 +62,9 @@ public class WePerson extends BaseModel {
 		return this instanceof Teacher;
 	}
 
-//	public boolean isSysAdmin() {
-//		return this instanceof SysAdmin;
-//	}
+	public boolean isSysAdmin() {
+		return this instanceof SysAdmin;
+	}
 
 
 }

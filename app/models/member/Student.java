@@ -57,7 +57,7 @@ public class Student extends WePerson {
 
 
 	public static Student registZhuji(Student student) {
-		student.password = DigestUtils.md5Hex("111111");
+		student.password = "111111";
 		student.create();
 		return student;
 	}

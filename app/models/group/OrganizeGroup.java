@@ -1,74 +1,74 @@
 package models.group;
 
+import models.BaseModel;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import java.util.List;
 
+/**
+ * @autor kevin.dai
+ * @Date 2018/3/17
+ */
+
 @Entity
-public class OrganizeGroup extends AbstractGroup {
+public class OrganizeGroup extends BaseModel{
 
 
-	public static OrganizeGroup addGroup(String groupName, String colorLogo, String whiteLogo, String groupIntro, String groupLogo) {
-		OrganizeGroup group = new OrganizeGroup();
-		group.groupName = groupName;
-		group.save();
-		group.rootGroup = group;
-		OrganizeGroup last = OrganizeGroup.find("isDeleted = 0 and parentGroup = null order by indexOrder desc")
-				.first();
-		group.indexOrder = last == null ? 0 : last.indexOrder;
-		group.indexOrder++;
-		return group.save();
-	}
+    public String name;
+
+    @Lob
+    public String address;
+
+
+    public String telphone;
+
+    public int indexOrder;
+
+
+    public static OrganizeGroup add(String name,String address,String telphone){
+        OrganizeGroup group = new OrganizeGroup();
+        group.name = name;
+        group.address = address;
+        group.telphone = telphone;
+        group.indexOrder = findMaxIndex()+1;
+        return group.save();
+    }
+
+
+    public void edit(String name,String address,String telphone){
+        if(!StringUtils.equals(name,this.name)){
+            this.name = name;
+        }
+        if(!StringUtils.equals(address,this.address)){
+            this.address = address;
+        }
+        if(!StringUtils.equals(telphone,this.telphone)){
+            this.telphone = telphone;
+        }
+        this.save();
+    }
+
+    public static int findMaxIndex() {
+        Integer count = OrganizeGroup.find("select max(indexOrder) from OrganizeGroup").first();
+        return count == null?0:count;
+    }
 
 
 
-	public static List<OrganizeGroup> list(String search) {
-		search = search == null ? "" : search;
-		return OrganizeGroup.find("isDeleted = 0 and groupName like ? order by indexOrder", "%" + search + "%").fetch();
-	}
-
-	public static List<OrganizeGroup> listRoot(String search, int page, int pageSize) {
-		search = search == null ? "" : search;
-		return OrganizeGroup.find("isDeleted = 0 and parentGroup = null and isPlat = 0 and groupName like ? order by indexOrder",
-				"%" + search + "%").fetch(page, pageSize);
-	}
-
-	public static Long count(String search) {
-		search = search == null ? "" : search;
-		return OrganizeGroup.count("isDeleted = 0 and groupName like ? ", "%" + search + "%");
-	}
-
-	public static Long countRoot(String search) {
-		search = search == null ? "" : search;
-		return OrganizeGroup.count("isDeleted = 0 and groupName like ? ", "%" + search + "%");
-	}
-
-	public static List<OrganizeGroup> fetchAll() {
-		return OrganizeGroup
-				.find("select org from OrganizeGroup org where org.isDeleted = false  order by createTime desc ")
-				.fetch();
-	}
-	
-	
-	public static List<OrganizeGroup> fetchAllJoinOrg() {
-		return OrganizeGroup
-				.find("select org from OrganizeGroup org where org.isDeleted = false and org.isPlat = false  order by createTime desc ")
-				.fetch();
-	}
+    public static List<OrganizeGroup> fetchAll(){
+        return find(defaultCondition()).fetch();
+    }
 
 
-	public static List<OrganizeGroup> listRoot() {
-		return OrganizeGroup.find("isDeleted = 0 and parentGroup = null").fetch();
-	}
 
 
-	public static OrganizeGroup fetchPlat(){
-		return find(getDefaultContitionSql(" isPlat = true ")).first();
-	}
-	
 
-	public static OrganizeGroup findByName(String name){
-		return OrganizeGroup.find(getDefaultContitionSql(" groupName = ? "),name).first();
-	}
+
+
+
+
+
+
 }

@@ -1,5 +1,6 @@
 package jobs;
 
+import models.member.SysAdmin;
 import org.hibernate.Session;
 import play.db.jpa.JPA;
 import play.jobs.Job;
@@ -14,8 +15,13 @@ public class StartUp extends Job {
 	public void doJob() throws Exception {
 		// 启动时的系统操作
 		super.doJob();
+		initData();
 	}
-	
+
+
+	public static void initData(){
+		SysAdmin.init();
+	}
 	
 
 

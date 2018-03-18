@@ -34,6 +34,9 @@ public class Result {
 	public static class StatusCode {
 		public static final Object[] SUCCESS = { 20000, "请求成功" };
 		public static final Object[] STUDENT_NAME_NULL = { 50001, "孩子姓名为空" };
+		public static final Object[] SYSTEM_TOKEN_UNVALID = { 50002, "accesstoken失效" };
+		public static final Object[] ERROR_PWD = { 50003, "密码错误" };
+		public static final Object[] PERSON_NOT_FOUND = { 50004, "用户不存在" };
 
 	}
 

@@ -5,7 +5,17 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 
-*       /back/{action}                          BackController.{action}
+POST    /api/org/add                            APIController.addOrg
+GET     /api/org/list                           APIController.orgList
+POST    /api/org/del                            APIController.delOrg
+POST    /api/org/edit                           APIController.editOrg
+
+
+POST    /api/show/teacher/add                   APIController.addShowTeachers
+GET     /api/show/teacher/list                  APIController.showTeachersList
+POST    /api/show/teacher/del                   APIController.delShowTeachers
+POST    /api/show/teacher/edit                  APIController.editShowTeachers
+
 *       /api/{action}                           APIController.{action}
 
 *       /{controller}/{action}                  {controller}.{action}

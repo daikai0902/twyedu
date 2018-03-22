@@ -33,12 +33,14 @@ public class GroupPerson extends BaseModel{
 
 
     public static GroupPerson findAdminbyGroup(OrganizeGroup group){
-        return find(getDefaultContitionSql(" group = ? and group.person.class = 'SysAdmin' "),group).first();
+        return find(" select gp from GroupPerson gp where gp.group.isDeleted = 0 and gp.person.isDeleted = 0 " +
+                "   and gp.group=? and gp.person.class = 'SysAdmin' ",group).first();
     }
 
 
     public static List<GroupPerson> findTeachersbyGroup(OrganizeGroup group){
-        return find(getDefaultContitionSql(" group = ? and group.person.class = 'Teacher' "),group).fetch();
+        return find(" select gp from GroupPerson gp where gp.group.isDeleted = 0 and gp.person.isDeleted = 0 " +
+                "   and gp.group=? and gp.person.class = 'Teacher' ",group).fetch();
     }
 
 }

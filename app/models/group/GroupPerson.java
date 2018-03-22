@@ -5,6 +5,7 @@ import models.WePerson;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 /**
  * @autor kevin.dai
@@ -31,8 +32,13 @@ public class GroupPerson extends BaseModel{
 
 
 
-    public static GroupPerson findbyGroup(OrganizeGroup group){
-        return find(getDefaultContitionSql(" group = ? "),group).first();
+    public static GroupPerson findAdminbyGroup(OrganizeGroup group){
+        return find(getDefaultContitionSql(" group = ? and group.person.class = 'SysAdmin' "),group).first();
+    }
+
+
+    public static List<GroupPerson> findTeachersbyGroup(OrganizeGroup group){
+        return find(getDefaultContitionSql(" group = ? and group.person.class = 'Teacher' "),group).fetch();
     }
 
 }

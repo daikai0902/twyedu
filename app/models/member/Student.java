@@ -56,14 +56,23 @@ public class Student extends WePerson {
 
 
 
-	public static Student registZhuji(Student student) {
-		student.password = "111111";
-		student.create();
-		return student;
+	public static Student add(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
+							  String momphone,String dadname,String dadphone,String nursery,String address) {
+
+		Student student = new Student();
+		student.name = name;
+		student.age = age;
+		student.sex = sex.equals("男孩")?false:true;
+		student.clothsize = clothsize;
+		student.shoessize = shoessize;
+		student.momname = momname;
+		student.momphone = momphone;
+		student.dadname = dadname;
+		student.dadphone = dadphone;
+		student.nursery = nursery;
+		student.address = address;
+		return student.save();
 	}
 
-	public static Long countStudent() {
-		return Student.count("select count(*) from Student where isDeleted=false");
-	}
 
 }

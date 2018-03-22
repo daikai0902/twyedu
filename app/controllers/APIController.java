@@ -6,6 +6,7 @@ import models.group.OrganizeGroup;
 import models.member.AccessToken;
 import models.member.Student;
 import models.member.SysAdmin;
+import models.member.Teacher;
 import org.apache.commons.lang.StringUtils;
 import vo.*;
 
@@ -91,7 +92,7 @@ public class APIController extends BaseController{
     public static void editOrg(Long groupId,String name,String address,String telphone,String password){
         OrganizeGroup group = OrganizeGroup.findById(groupId);
         group.edit(name,address,telphone);
-        GroupPerson groupPerson = GroupPerson.findbyGroup(group);
+        GroupPerson groupPerson = GroupPerson.findAdminbyGroup(group);
         if(groupPerson.person != null){
             WePerson person = groupPerson.person;
             person.eidtPwd(password);
@@ -289,8 +290,8 @@ public class APIController extends BaseController{
      * 新增新闻
      * @Date: 16:18 2018/3/17
      */
-    public static void addNews(Boolean isNews,String name,String content,String videoUrl){
-        News news =  News.add(isNews,name,content,videoUrl);
+    public static void addNews(String name,String content,String videoUrl){
+        News news =  News.add(name,content,videoUrl);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 
@@ -299,8 +300,8 @@ public class APIController extends BaseController{
      * 新增新闻链接
      * @Date: 16:18 2018/3/17
      */
-    public static void addNewsLink(Boolean isNews,String name,String link){
-        News news =  News.addLink(isNews,name, link);
+    public static void addNewsLink(String name,String link){
+        News news =  News.addLink(name, link);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 
@@ -322,9 +323,9 @@ public class APIController extends BaseController{
      * 编辑新闻
      * @Date: 16:18 2018/3/17
      */
-    public static void editNews(Long newsId,Boolean isNews,String name,String content,String videoUrl){
+    public static void editNews(Long newsId,String name,String content,String videoUrl){
         News news = News.findById(newsId);
-        news.edit(isNews,name,content,videoUrl);
+        news.edit(name,content,videoUrl);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 
@@ -334,9 +335,9 @@ public class APIController extends BaseController{
      * 编辑新闻链接
      * @Date: 16:18 2018/3/17
      */
-    public static void editNewsLink(Long newsId,Boolean isNews,String name,String link){
+    public static void editNewsLink(Long newsId,String name,String link){
         News news = News.findById(newsId);
-        news.editLink(isNews,name,link);
+        news.editLink(name,link);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 
@@ -351,6 +352,131 @@ public class APIController extends BaseController{
         List<News> newsList = News.fetchAll();
         renderJSON(Result.succeed(new PageData(NewsVO.list(newsList))));
     }
+
+
+    //************************网点管理****************************************
+
+
+
+
+
+    /**
+     * 新增课程
+     * @Date: 23:47 2018/3/21
+     */
+    public static void addCourse(Long groupId,String name,String feeType,String fee,String content){
+        OrganizeGroup group = OrganizeGroup.findById(groupId);
+        Course course = Course.add(group,name,feeType,fee);
+        renderJSON(Result.succeed(new CourseVO(course)));
+    }
+
+
+
+    /**
+     * 课程列表
+     * @Date: 00:39 2018/3/22
+     */
+    public static void courseList(Long groupId){
+        List<Course> courses = Course.findByGroup(groupId);
+        renderJSON(Result.succeed(new PageData(CourseVO.list(courses))));
+    }
+
+
+    /**
+     * 删除课程
+     * @Date: 00:48 2018/3/22
+     */
+    public static void deleteCourse(Long courseId){
+        Course course = Course.findById(courseId);
+        course.logicDelete();
+        renderJSON(Result.succeed());
+    }
+
+
+    /**
+     * 编辑课程
+     * @Date: 00:53 2018/3/22
+     */
+    public static void editCourse(Long courseId,String name,String feeType,String fee){
+        Course course = Course.findById(courseId);
+        course.edit(name,feeType,fee);
+        renderJSON(Result.succeed(new CourseVO(course)));
+    }
+
+
+    /**
+     * 发布课程
+     * @Date: 00:46 2018/3/22
+     */
+    public static void releaseCourse(Long courseId,boolean status){
+        Course course = Course.findById(courseId);
+        course.setRelease(status);
+        renderJSON(Result.succeed(new CourseVO(course)));
+    }
+
+
+    /**
+     * 预约课程
+     * @Date: 00:50 2018/3/22
+     */
+    public static void orderCourse(Long courseId,boolean status){
+        Course course = Course.findById(courseId);
+        course.setOrder(status);
+        renderJSON(Result.succeed(new CourseVO(course)));
+    }
+
+
+    /**
+     * 新增老师
+     * @Date: 01:23 2018/3/22
+     */
+    public static void addTeacher(Long groupId,String name,String cellphone,String IDcard,String imgUrl){
+        OrganizeGroup group = OrganizeGroup.findById(groupId);
+        Teacher teacher = Teacher.add(name,cellphone,IDcard,imgUrl);
+        GroupPerson gp = GroupPerson.add(group,teacher);
+        renderJSON(Result.succeed(new GroupTeacherVO(gp)));
+    }
+
+
+
+    /**
+     * 教师列表
+     * @Date: 21:52 2018/3/22
+     */
+    public static void teacherList(Long groupId){
+        OrganizeGroup group = OrganizeGroup.findById(groupId);
+        List<GroupPerson> groupPersonList = GroupPerson.findTeachersbyGroup(group);
+        renderJSON(Result.succeed(new PageData(GroupTeacherVO.list(groupPersonList))));
+    }
+
+
+
+
+    /**
+     * 新增班级
+     * @Date: 21:49 2018/3/22
+     */
+    public static void addClazz(String name,Long courseId,Long teacherAId,Long teacherBId,String num,String time,String duration){
+        Clazz clazz = Clazz.add(name,Course.findById(courseId),Teacher.findById(teacherAId),
+                    Teacher.findById(teacherBId),num,time,duration);
+        renderJSON(Result.succeed(new ClazzVO(clazz)));
+    }
+
+
+
+
+    /**
+     * 新增学生
+     * @Date: 22:31 2018/3/22
+     */
+    public static void addStudent(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
+                                  String momphone,String dadname,String dadphone,String nursery,String address){
+        Student student =  Student.add(name,age,sex,clothsize,shoessize,momname,momphone,dadname,dadphone,nursery,address);
+        renderJSON(Result.succeed(new StudentVO(student)));
+    }
+
+
+
 
 
 

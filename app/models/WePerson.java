@@ -27,6 +27,8 @@ public class WePerson extends BaseModel {
 
 	public String cellPhone;
 
+	public String number;//工号
+
 
 	@ManyToOne
 	public WeChatMember wMember;

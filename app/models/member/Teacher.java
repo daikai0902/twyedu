@@ -2,6 +2,8 @@ package models.member;
 
 import models.WePerson;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.StringUtils;
+import utils.ComUtils;
 
 import javax.persistence.Entity;
 import java.util.Collections;
@@ -10,30 +12,27 @@ import java.util.List;
 @Entity
 public class Teacher extends WePerson {
 
-	public String job;// 职务
+
+	public String imgUrl;//头像
+
+	public String IDcard;//身份证
 
 
 
-	public Teacher() {
-	}
 
-	public static Teacher regist(Teacher teacher) {
-		teacher.password = DigestUtils.md5Hex("111111");
+	public static Teacher add(String name,String cellphone,String IDcard,String imgUrl) {
+		Teacher teacher = new Teacher();
+		teacher.name = name;
+		teacher.cellPhone = cellphone;
+		teacher.IDcard = IDcard;
+		teacher.imgUrl = imgUrl;
+		teacher.password = StringUtils.substring(IDcard,0,11);
 		teacher.save();
-		return teacher;
+		teacher.number = "T"+ ComUtils.formatDate(teacher.createTime,"yyMMdd")+ String.format("0000",teacher.id);
+		return teacher.save();
 	}
 
 
-	public static Long countTeacher() {
-		return Teacher.count("select count(*) from Teacher where isDeleted=false");
-	}
 
-	public static List<Teacher> fetchTeacherByIDs(List<Long> memberIdList) {
-		if (memberIdList == null || memberIdList.isEmpty()) {
-			return Collections.EMPTY_LIST;
-		}
-		return Teacher.find("select t from Teacher t where t.isDeleted=false and t.id in(:memberIds)")
-				.bind("memberIds", memberIdList.toArray()).fetch();
-	}
 
 }

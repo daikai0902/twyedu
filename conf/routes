@@ -45,6 +45,8 @@ POST    /api/show/teacher/edit                  APIController.editShowTeachers
 
 
 
+*       /api/org/info                        APIController.getOrgInfo
+
 POST    /api/course/add                         APIController.addCourse
 *       /api/course/list                        APIController.courseList
 POST    /api/course/del                         APIController.deleteCourse

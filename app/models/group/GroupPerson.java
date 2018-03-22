@@ -31,6 +31,11 @@ public class GroupPerson extends BaseModel{
     }
 
 
+    public static GroupPerson findAdminbyPerson(WePerson person){
+        return find(" select gp from GroupPerson gp where gp.group.isDeleted = 0 and gp.person.isDeleted = 0 " +
+                "   and gp.person=? and gp.person.class = 'SysAdmin' ",person).first();
+    }
+
 
     public static GroupPerson findAdminbyGroup(OrganizeGroup group){
         return find(" select gp from GroupPerson gp where gp.group.isDeleted = 0 and gp.person.isDeleted = 0 " +

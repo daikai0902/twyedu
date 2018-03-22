@@ -37,6 +37,7 @@ public class Result {
 		public static final Object[] SYSTEM_TOKEN_UNVALID = { 50002, "accesstoken失效" };
 		public static final Object[] ERROR_PWD = { 50003, "密码错误" };
 		public static final Object[] PERSON_NOT_FOUND = { 50004, "用户不存在" };
+		public static final Object[] PERSON_NOT_ADMIN = { 50005, "用户不是管理员" };
 
 	}
 

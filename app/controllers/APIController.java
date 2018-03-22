@@ -357,7 +357,14 @@ public class APIController extends BaseController{
     //************************网点管理****************************************
 
 
-
+    public static void getOrgInfo(){
+        WePerson person = getPersonByToken();
+        GroupPerson groupPerson  = GroupPerson.findAdminbyPerson(person);
+        if(groupPerson == null){
+            renderJSON(Result.failed(Result.StatusCode.PERSON_NOT_ADMIN));
+        }
+        renderJSON(Result.succeed(new OrgGroupVO(groupPerson.group)));
+    }
 
 
     /**

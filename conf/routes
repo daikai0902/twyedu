@@ -23,7 +23,7 @@ POST    /api/news/add                           APIController.addNews
 POST    /api/news/link/add                      APIController.addNewsLink
 POST    /api/news/del                           APIController.delNews
 POST    /api/news/edit                          APIController.editNews
-POST    /api/news/edit                          APIController.editNewsLink
+POST    /api/news/link/edit                     APIController.editNewsLink
 *       /api/news/list                          APIController.newsList
 
 

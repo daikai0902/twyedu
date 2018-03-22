@@ -23,7 +23,6 @@ public class NewsVO extends OneData{
 
     public String type;//"1:普通 2:链接"
 
-    public Boolean isNews;//"1:新闻 0:公告"
 
 
     public NewsVO(){
@@ -38,7 +37,6 @@ public class NewsVO extends OneData{
         this.videoUrl = news.videoUrl;
         this.link = news.link;
         this.type = news.type;
-        this.isNews = news.isNews;
     }
 
 

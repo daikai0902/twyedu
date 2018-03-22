@@ -35,7 +35,7 @@ public class WePerson extends BaseModel {
 
 
 	public void eidtPwd(String password){
-		this.password = DigestUtils.md5Hex(password);
+		this.password = password;
 		this.save();
 	}
 

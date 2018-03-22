@@ -11,6 +11,13 @@ POST    /api/org/del                            APIController.delOrg
 POST    /api/org/edit                           APIController.editOrg
 
 
+POST    /api/activity/add                       APIController.addActivity
+POST    /api/activity/link/add                  APIController.addActivityLink
+POST    /api/activity/del                       APIController.delActivity
+POST    /api/activity/edit                      APIController.editActivity
+POST    /api/activity/link/edit                 APIController.editActivityLink
+*       /api/activity/list                      APIController.activityList
+
 POST    /api/show/teacher/add                   APIController.addShowTeachers
 GET     /api/show/teacher/list                  APIController.showTeachersList
 POST    /api/show/teacher/del                   APIController.delShowTeachers

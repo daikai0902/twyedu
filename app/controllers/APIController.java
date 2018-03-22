@@ -43,6 +43,9 @@ public class APIController extends BaseController{
         WePerson person = WePerson.findByName(username);
         if (person != null){
             if(StringUtils.equals(password,person.password)){
+                if(!person.isSysAdmin()){
+                    renderJSON(Result.failed(Result.StatusCode.PERSON_NOT_ADMIN));
+                }
                 AccessToken accessToken = AccessToken.regist(person);
                 renderJSON(Result.succeed(new WePersonVO(accessToken)));
             }else
@@ -51,6 +54,9 @@ public class APIController extends BaseController{
             person = WePerson.findByPhone(username);
             if(person != null){
                 if(StringUtils.equals(password,person.password)){
+                    if(!person.isTeacher()){
+                        renderJSON(Result.failed(Result.StatusCode.PERSON_NOT_TEACHER));
+                    }
                     AccessToken accessToken = AccessToken.regist(person);
                     renderJSON(Result.succeed(new WePersonVO(accessToken)));
                 }else

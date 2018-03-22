@@ -18,10 +18,49 @@ POST    /api/activity/edit                      APIController.editActivity
 POST    /api/activity/link/edit                 APIController.editActivityLink
 *       /api/activity/list                      APIController.activityList
 
+
+POST    /api/news/add                           APIController.addNews
+POST    /api/news/link/add                      APIController.addNewsLink
+POST    /api/news/del                           APIController.delNews
+POST    /api/news/edit                          APIController.editNews
+POST    /api/news/edit                          APIController.editNewsLink
+*       /api/news/list                          APIController.newsList
+
+
+POST    /api/show/clazz/add                     APIController.addShowOpenClazz
+POST    /api/show/clazz/del                     APIController.delShowOpenClazz
+POST    /api/show/clazz/edit                    APIController.editShowOpenClazz
+*       /api/show/clazz/list                    APIController.showOpenClazzList
+
+
+POST    /api/show/course/add                    APIController.addShowCourse
+POST    /api/show/course/del                    APIController.delShowCourse
+POST    /api/show/course/edit                   APIController.editShowCourse
+*       /api/show/course/list                   APIController.showCourseList
+
 POST    /api/show/teacher/add                   APIController.addShowTeachers
 GET     /api/show/teacher/list                  APIController.showTeachersList
 POST    /api/show/teacher/del                   APIController.delShowTeachers
 POST    /api/show/teacher/edit                  APIController.editShowTeachers
+
+
+
+POST    /api/course/add                         APIController.addCourse
+*       /api/course/list                        APIController.courseList
+POST    /api/course/del                         APIController.deleteCourse
+POST    /api/course/edit                        APIController.editCourse
+POST    /api/course/release                     APIController.releaseCourse
+POST    /api/course/order                       APIController.orderCourse
+
+
+POST    /api/teacher/add                        APIController.addTeacher
+*       /api/teacher/list                       APIController.teacherList
+
+
+POST    /api/clazz/add                          APIController.addClazz
+
+
+POST    /api/student/add                        APIController.addStudent
 
 *       /api/{action}                           APIController.{action}
 

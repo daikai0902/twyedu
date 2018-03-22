@@ -41,7 +41,7 @@ public class OrgGroupVO extends OneData{
         this.address = group.address;
         this.telphone = group.telphone;
         this.groupId = group.id;
-        GroupPerson groupPerson = GroupPerson.findbyGroup(group);
+        GroupPerson groupPerson = GroupPerson.findAdminbyGroup(group);
         if(groupPerson != null && groupPerson.person != null){
             this.adminId = groupPerson.person.id;
             this.adminName = groupPerson.person.name;

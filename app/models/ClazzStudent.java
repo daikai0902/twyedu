@@ -4,6 +4,7 @@ import models.member.Student;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 /**
  * @autor kevin.dai
@@ -19,10 +20,20 @@ public class ClazzStudent extends BaseModel {
     public Student student;
 
 
+    public String arrive;//点到情况
+
+
     public static ClazzStudent add(Clazz clazz,Student student){
         ClazzStudent clazzStudent = new ClazzStudent();
         clazzStudent.clazz = clazz;
         clazzStudent.student = student;
         return  clazzStudent.save();
+    }
+
+
+
+    public static List<ClazzStudent> findClazz(Long clazzId){
+        return find(getDefaultContitionSql(" clazz.id = ? "),clazzId).fetch();
+
     }
 }

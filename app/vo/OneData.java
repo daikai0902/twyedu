@@ -9,6 +9,7 @@ public class OneData extends Data {
 	public Long id;
 	public Long lut;
 	public Integer deleted;
+	public String createTime;
 
 	public OneData() {
 

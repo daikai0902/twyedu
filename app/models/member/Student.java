@@ -2,6 +2,7 @@ package models.member;
 
 import models.WePerson;
 import org.apache.commons.codec.digest.DigestUtils;
+import utils.ComUtils;
 
 import javax.persistence.Entity;
 
@@ -71,6 +72,8 @@ public class Student extends WePerson {
 		student.dadphone = dadphone;
 		student.nursery = nursery;
 		student.address = address;
+		student.save();
+		student.number = ComUtils.formatDate(student.createTime,"yyMMdd")+ String.format("00000",student.id);
 		return student.save();
 	}
 

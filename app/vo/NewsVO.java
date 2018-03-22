@@ -1,6 +1,7 @@
 package vo;
 
 import models.News;
+import utils.ComUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public class NewsVO extends OneData{
         this.videoUrl = news.videoUrl;
         this.link = news.link;
         this.type = news.type;
+        this.createTime = ComUtils.formatDate(news.createTime,"yyyy年MM月dd日");
     }
 
 

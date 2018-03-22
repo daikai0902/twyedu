@@ -478,6 +478,28 @@ public class APIController extends BaseController{
 
 
 
+    /**
+     * 学生新分配到班
+     * @Date: 00:01 2018/3/23
+     */
+    public static void addToClazz(Long studentId,Long clazzId){
+        Student student = Student.findById(studentId);
+        Clazz clazz = Clazz.findById(clazzId);
+        ClazzStudent.add(clazz,student);
+        renderJSON(Result.succeed());
+    }
+
+
+    /**
+     * 微信报名和预约报名
+     * @Date: 00:18 2018/3/23
+     */
+    public static void wxStudentList(Long courseId,String type){
+        List<Student> students = CourseStudent.findByCourse(courseId,type);
+        renderJSON(Result.succeed());
+    }
+
+
 
 
 

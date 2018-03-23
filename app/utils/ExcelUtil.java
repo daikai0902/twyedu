@@ -214,22 +214,32 @@ public class ExcelUtil {
 			// 获取第一个sheet
 			sheet = workbook.getSheetAt(0);
 		} catch (Exception e) {
-			Logger.error("初始化excel有误");
+			e.printStackTrace();
 		}
 		if (sheet != null) {
 			// 写数据
 			FileOutputStream fos = new FileOutputStream(file);
-			int rowIndex = 2;
-			for(ClazzStudentVO vo:vos){
-				sheet.getRow(rowIndex).getCell(0).setCellValue(vo.number);
-				sheet.getRow(rowIndex).getCell(1).setCellValue(vo.name);
-				sheet.getRow(rowIndex).getCell(2).setCellValue(vo.age+"/"+vo.sex);
-				sheet.getRow(rowIndex).getCell(3).setCellValue(vo.clothsize+"/"+vo.shoessize);
-				sheet.getRow(rowIndex).getCell(4).setCellValue(vo.momname+"("+vo.momphone+")"+"\n"+vo.dadname+"("+vo.dadphone+")");
-				sheet.getRow(rowIndex).getCell(5).setCellValue(vo.nursery+"/"+vo.address);
-				sheet.getRow(rowIndex).getCell(6).setCellValue(vo.arrive);
+			if(vos != null && vos.size() > 0) {
+				int rowIndex = 1;
+				for (ClazzStudentVO vo : vos) {
+					if(sheet.getRow(rowIndex) == null){
+						sheet.createRow(rowIndex);
+					}
+					for(int i=0;i<=6;i++){
+						if(sheet.getRow(rowIndex).getCell(i) == null){
+							sheet.getRow(rowIndex).createCell(i);
+						}
+					}
+					sheet.getRow(rowIndex).getCell(0).setCellValue(vo.number);
+					sheet.getRow(rowIndex).getCell(1).setCellValue(vo.name);
+					sheet.getRow(rowIndex).getCell(2).setCellValue(vo.age + "/" + vo.sex);
+					sheet.getRow(rowIndex).getCell(3).setCellValue(vo.clothsize + "/" + vo.shoessize);
+					sheet.getRow(rowIndex).getCell(4).setCellValue(vo.momname + "(" + vo.momphone + ")" + "\n" + vo.dadname + "(" + vo.dadphone + ")");
+					sheet.getRow(rowIndex).getCell(5).setCellValue(vo.nursery + "/" + vo.address);
+					sheet.getRow(rowIndex).getCell(6).setCellValue(vo.arrive);
 
-				rowIndex++;
+					rowIndex++;
+				}
 			}
 			workbook.write(fos);
 			fos.flush();

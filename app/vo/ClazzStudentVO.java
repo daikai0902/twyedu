@@ -77,8 +77,8 @@ public class ClazzStudentVO extends OneData {
         this.dadphone = clazzStudent.student.dadphone;
         this.nursery = clazzStudent.student.nursery;
         this.arrive = formatArrive(clazzStudent.arrive)+"/"+clazzStudent.clazz.num;
-        this.reportStatus = Report.findByStudent(clazzStudent.student).status.toString();
-        this.reportId = Report.findByStudent(clazzStudent.student).id;
+        this.reportStatus = Report.findByStudent(clazzStudent.student) == null?"":Report.findByStudent(clazzStudent.student).status.toString();
+        this.reportId = Report.findByStudent(clazzStudent.student) == null?null:Report.findByStudent(clazzStudent.student).id;
     }
 
 

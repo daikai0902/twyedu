@@ -5,6 +5,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import utils.ComUtils;
 
 import javax.persistence.Entity;
+import java.text.DecimalFormat;
 
 @Entity
 public class Student extends WePerson {
@@ -73,7 +74,7 @@ public class Student extends WePerson {
 		student.nursery = nursery;
 		student.address = address;
 		student.save();
-		student.number = ComUtils.formatDate(student.createTime,"yyMMdd")+ String.format("00000",student.id);
+		student.number = ComUtils.formatDate(student.createTime,"yyMMdd")+new DecimalFormat("00000").format(student.id);
 		return student.save();
 	}
 

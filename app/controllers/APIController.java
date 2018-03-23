@@ -557,6 +557,8 @@ public class APIController extends BaseController{
         Student student =  Student.add(name,age,sex,clothsize,shoessize,momname,momphone,dadname,dadphone,nursery,address);
         Clazz clazz = Clazz.findById(clazzId);
         ClazzStudent.add(clazz,student);
+        //新增成绩单
+        Report.add(student,null,null,null);
         renderJSON(Result.succeed(new StudentVO(student)));
     }
 

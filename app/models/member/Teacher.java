@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import utils.ComUtils;
 
 import javax.persistence.Entity;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Teacher extends WePerson {
 		teacher.imgUrl = imgUrl;
 		teacher.password = StringUtils.substring(IDcard,0,11);
 		teacher.save();
-		teacher.number = "T"+ ComUtils.formatDate(teacher.createTime,"yyMMdd")+ String.format("0000",teacher.id);
+		teacher.number = "T"+ ComUtils.formatDate(teacher.createTime,"yyMMdd")+ new DecimalFormat("0000").format(teacher.id);
 		return teacher.save();
 	}
 

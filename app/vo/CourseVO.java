@@ -1,5 +1,6 @@
 package vo;
 
+import models.Clazz;
 import models.Course;
 
 import java.util.Collections;
@@ -24,6 +25,8 @@ public class CourseVO extends OneData {
 
     public Boolean order;
 
+    public List<ClazzVO> clazzs;
+
 
     public CourseVO(){
 
@@ -37,8 +40,20 @@ public class CourseVO extends OneData {
         this.name = course.name;
         this.feeType = course.feeType;
         this.fee = course.fee;
-        this.release = course.release;
-        this.order = course.order;
+        this.release = course.isRelease;
+        this.order = course.isOrder;
+    }
+
+
+    public CourseVO(Course course, List<Clazz> clazzes){
+        this.id = course.id;
+        this.groupId = course.group.id;
+        this.name = course.name;
+        this.feeType = course.feeType;
+        this.fee = course.fee;
+        this.release = course.isRelease;
+        this.order = course.isOrder;
+        this.clazzs = ClazzVO.list(clazzes);
     }
 
 
@@ -48,6 +63,15 @@ public class CourseVO extends OneData {
             return Collections.emptyList();
         }
         return courses.stream().map(c -> new CourseVO(c)).collect(Collectors.toList());
+    }
+
+
+
+    public static List<CourseVO> listClazz(List<Course> courses){
+        if(courses.isEmpty()){
+            return Collections.emptyList();
+        }
+        return courses.stream().map(c -> new CourseVO(c,Clazz.findbyCourse(c))).collect(Collectors.toList());
     }
 
 }

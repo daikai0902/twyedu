@@ -1,6 +1,7 @@
 package vo;
 
 import models.Clazz;
+import models.ClazzStudent;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +19,13 @@ public class ClazzVO extends OneData{
 
     public Long teacherAId;
 
+    public String teacherAName;
 
     public Long teacherBId;
+
+    public String teacherBName;
+
+    public Long studentNum;
 
     public String num;
 
@@ -34,6 +40,7 @@ public class ClazzVO extends OneData{
 
 
     public ClazzVO(Clazz clazz){
+        this.id = clazz.id;
         this.name = clazz.name;
         this.courseId = clazz.course.id;
         this.teacherAId = clazz.teacherA.id;
@@ -41,6 +48,9 @@ public class ClazzVO extends OneData{
         this.num  = clazz.num;
         this.time = clazz.time;
         this.duration = clazz.duration;
+        this.teacherAName = clazz.teacherA.name;
+        this.teacherBName = clazz.teacherB.name;
+        this.studentNum = ClazzStudent.countStudent(clazz);
     }
 
 

@@ -10,6 +10,7 @@ import models.member.Teacher;
 import org.apache.commons.lang.StringUtils;
 import vo.*;
 
+import java.security.acl.Group;
 import java.util.List;
 
 /**
@@ -377,7 +378,7 @@ public class APIController extends BaseController{
      * 新增课程
      * @Date: 23:47 2018/3/21
      */
-    public static void addCourse(Long groupId,String name,String feeType,String fee,String content){
+    public static void addCourse(Long groupId,String name,String feeType,String fee){
         OrganizeGroup group = OrganizeGroup.findById(groupId);
         Course course = Course.add(group,name,feeType,fee);
         renderJSON(Result.succeed(new CourseVO(course)));
@@ -453,6 +454,20 @@ public class APIController extends BaseController{
 
 
     /**
+     * 删除老师
+     * @Date: 19:05 2018/3/23
+     */
+    public static void delTeacher(Long teacherId){
+        Teacher teacher = Teacher.findById(teacherId);
+        GroupPerson gp = GroupPerson.findTeacherbyPerson(teacher);
+        gp.logicDelete();
+        teacher.logicDelete();
+        renderJSON(Result.succeed());
+    }
+
+
+
+    /**
      * 教师列表
      * @Date: 21:52 2018/3/22
      */
@@ -463,6 +478,17 @@ public class APIController extends BaseController{
     }
 
 
+
+
+    /**
+     * 查看班级列表
+     * @Date: 19:55 2018/3/23
+     */
+    public static void teacherClazzs(Long teacherId){
+        Teacher teacher = Teacher.findById(teacherId);
+        List<Clazz> clazzes = Clazz.findByTeacher(teacher);
+        renderJSON(Result.succeed(new PageData(ClazzVO.list(clazzes))));
+    }
 
 
     /**
@@ -479,12 +505,49 @@ public class APIController extends BaseController{
 
 
     /**
+     * 班级列表
+     * @Date: 20:25 2018/3/23
+     */
+    public static void clazzList(Long groupId){
+        List<Course> courses = Course.findByGroup(groupId);
+        renderJSON(Result.succeed(new PageData(CourseVO.listClazz(courses))));
+    }
+
+
+
+    /**
+     * 班级删除
+     * @Date: 20:25 2018/3/23
+     */
+    public static void delClazz(Long clazzId){
+        Clazz clazz = Clazz.findById(clazzId);
+        clazz.logicDelete();
+        renderJSON(Result.succeed());
+    }
+
+
+    /**
+     * 班级编辑
+     * @Date: 20:25 2018/3/23
+     */
+    public static void editClazz(Long clazzId,String name,Long courseId,Long teacherAId,
+                                    Long teacherBId,String num,String time,String duration){
+        Clazz clazz = Clazz.findById(clazzId);
+        clazz.edit(name,Course.findById(courseId),Teacher.findById(teacherAId),
+                Teacher.findById(teacherBId),num,time,duration);
+        renderJSON(Result.succeed(new ClazzVO(clazz)));
+    }
+
+
+    /**
      * 新增学生
      * @Date: 22:31 2018/3/22
      */
-    public static void addStudent(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
+    public static void addStudent(Long clazzId,String name,Integer age,String sex,String clothsize,String shoessize,String momname,
                                   String momphone,String dadname,String dadphone,String nursery,String address){
         Student student =  Student.add(name,age,sex,clothsize,shoessize,momname,momphone,dadname,dadphone,nursery,address);
+        Clazz clazz = Clazz.findById(clazzId);
+        ClazzStudent.add(clazz,student);
         renderJSON(Result.succeed(new StudentVO(student)));
     }
 
@@ -492,15 +555,64 @@ public class APIController extends BaseController{
 
 
     /**
+     * 删除学生
+     * @Date: 22:10 2018/3/23
+     */
+    public  static void deletStudent(Long id){
+        ClazzStudent cs = ClazzStudent.findById(id);
+        cs.logicDelete();
+        renderJSON(Result.succeed());
+    }
+
+
+
+
+    /**
+     * 班级列表
+     * @Date: 21:09 2018/3/23
+     */
+    public static void studentList(Long clazzId){
+        List<ClazzStudent> clazzStudents = ClazzStudent.findClazz(clazzId);
+        renderJSON(Result.succeed(new PageData(ClazzStudentVO.list(clazzStudents))));
+    }
+
+
+
+    /**
+     * 课程下的班级
+     * @Date: 22:21 2018/3/23
+     */
+    public static void getClazz(Long courseId){
+        List<Clazz> clazzes = Clazz.findbyCourse(Course.findById(courseId));
+        renderJSON(Result.succeed(new PageData(ClazzVO.list(clazzes))));
+    }
+
+
+
+    /**
      * 学生新分配到班
      * @Date: 00:01 2018/3/23
      */
-    public static void addToClazz(Long studentId,Long clazzId){
-        Student student = Student.findById(studentId);
-        Clazz clazz = Clazz.findById(clazzId);
-        ClazzStudent.add(clazz,student);
+    public static void addToClazz(Long courseStudentId,Long clazzId){
+        CourseStudent cs = CourseStudent.findById(courseStudentId);
+        ClazzStudent.add(Clazz.findById(clazzId),cs.student);
+        //删除
+        cs.logicDelete();
         //同时新增成绩单
-        Report.add(student,null,null,null);
+        Report.add(cs.student,null,null,null);
+        renderJSON(Result.succeed());
+    }
+
+
+
+
+    /**
+     * 从报名的课程里删除
+     * @Date: 23:01 2018/3/23
+     */
+    public static void delFromCourse(Long courseStudentId){
+        CourseStudent cs = CourseStudent.findById(courseStudentId);
+        cs.logicDelete();
         renderJSON(Result.succeed());
     }
 
@@ -510,10 +622,15 @@ public class APIController extends BaseController{
      * @Date: 00:18 2018/3/23
      */
     public static void wxStudentList(Long courseId,String type){
-        List<Student> students = CourseStudent.findByCourse(courseId,type);
-        renderJSON(Result.succeed());
+        List<CourseStudent> courseStudents = CourseStudent.findByCourse(courseId,type);
+        renderJSON(Result.succeed(new PageData(CourseStudentVO.list(courseStudents))));
     }
 
+
+
+
+
+    //****************************教师*******************************
 
     /**
      * 点到

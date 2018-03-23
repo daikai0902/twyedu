@@ -1,5 +1,6 @@
 package vo;
 
+import models.Clazz;
 import models.group.GroupPerson;
 import models.member.Teacher;
 
@@ -46,6 +47,7 @@ public class GroupTeacherVO extends OneData{
         this.IDcard =((Teacher)groupTeacher.person).IDcard;
         this.groupId = groupTeacher.group.id;
         this.teacherId = ((Teacher) groupTeacher.person).id;
+        this.clazzNum = Clazz.countClazzsByTeachers((Teacher)groupTeacher.person);
     }
 
 

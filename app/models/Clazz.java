@@ -4,6 +4,8 @@ import models.member.Teacher;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @autor kevin.dai
@@ -34,6 +36,29 @@ public class Clazz extends BaseModel {
 
 
 
+    public static List<Clazz> findbyCourse(Course course){
+        return find(getDefaultContitionSql(" course = ? "),course).fetch();
+    }
+
+
+    public static List<Clazz> findByTeacher(Teacher teacher){
+        List<Clazz> list = new ArrayList<>();
+        List<Clazz> list1 = find(getDefaultContitionSql(" teacherA = ? "),teacher).fetch();
+        List<Clazz> list2 = find(getDefaultContitionSql(" teacherB = ? "),teacher).fetch();
+        list.addAll(list1);
+        list.addAll(list2);
+        return  list;
+    }
+
+
+
+    public static  Long countClazzsByTeachers(Teacher teacher){
+        return count(getDefaultContitionSql(" teacherA = ?  "),teacher)+count(getDefaultContitionSql(" teacherB = ?  "),teacher);
+    }
+
+
+
+
     public static Clazz add(String name,Course course,Teacher teacherA,Teacher teacherB,String num,String time,String duration){
         Clazz clazz = new Clazz();
         clazz.name = name;
@@ -44,5 +69,19 @@ public class Clazz extends BaseModel {
         clazz.num = num;
         clazz.duration = duration;
         return clazz.save();
+    }
+
+
+
+
+    public void edit(String name,Course course,Teacher teacherA,Teacher teacherB,String num,String time,String duration){
+        this.name = name;
+        this.course =course;
+        this.teacherA = teacherA;
+        this.teacherB = teacherB;
+        this.time = time;
+        this.num = num;
+        this.duration = duration;
+        this.save();
     }
 }

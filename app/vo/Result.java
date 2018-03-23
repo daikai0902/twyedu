@@ -81,7 +81,7 @@ public class Result {
 
 	public static String succeed() {
 		Result result = new Result();
-		result.status = "true";
+		result.status = "succ";
 		result.code = (int) StatusCode.SUCCESS[0];
 		result.message = (String) StatusCode.SUCCESS[1];
 		try {

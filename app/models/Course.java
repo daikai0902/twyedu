@@ -23,9 +23,9 @@ public class Course extends BaseModel{
 
     public String fee;//金额
 
-    public Boolean release = false;//是否发布
+    public boolean isRelease = false;//是否发布
 
-    public Boolean order = false;//是否允许预约
+    public boolean isOrder = false;//是否允许预约
 
 
     public static Course add(OrganizeGroup group,String name,String feeType,String fee){
@@ -51,13 +51,13 @@ public class Course extends BaseModel{
 
 
     public void setRelease(boolean status){
-        this.release = status;
+        this.isRelease = status;
         this.save();
     }
 
 
     public void setOrder(boolean status){
-        this.order = status;
+        this.isOrder = status;
         this.save();
     }
 

@@ -1,8 +1,10 @@
 package vo;
 
+import models.Clazz;
 import models.WePerson;
 import models.member.AccessToken;
 import models.member.SysAdmin;
+import models.member.Teacher;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +28,8 @@ public class WePersonVO extends OneData {
 
 	public String role;
 
+	public List<ClazzVO> clazzs;
+
 	public WePersonVO() {
 	}
 
@@ -43,6 +47,8 @@ public class WePersonVO extends OneData {
 		this.accesstoken = accessToken.accessToken;
 		if(p.isTeacher()){
 			this.role = "teacher";
+			List<Clazz> clazzes = Clazz.findByTeacher((Teacher) p);
+			this.clazzs = ClazzVO.list(clazzes);
 		}
 		if (p.isSysAdmin()){
 			SysAdmin admin = (SysAdmin) p;

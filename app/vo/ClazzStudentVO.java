@@ -1,6 +1,7 @@
 package vo;
 
 import models.ClazzStudent;
+import models.Report;
 import models.member.Student;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
@@ -45,6 +46,12 @@ public class ClazzStudentVO extends OneData {
 
     public String arrive;//点到
 
+    public String number;
+
+    public String reportStatus;//成绩单状态
+
+    public Long reportId;
+
 
 
 
@@ -56,6 +63,7 @@ public class ClazzStudentVO extends OneData {
 
     public ClazzStudentVO(ClazzStudent clazzStudent){
         this.id = clazzStudent.id;
+        this.number = clazzStudent.student.number;
         this.name = clazzStudent.student.name;
         this.age = clazzStudent.student.age;
         this.sex = BooleanUtils.toString(clazzStudent.student.sex,"女","男");
@@ -69,6 +77,8 @@ public class ClazzStudentVO extends OneData {
         this.dadphone = clazzStudent.student.dadphone;
         this.nursery = clazzStudent.student.nursery;
         this.arrive = formatArrive(clazzStudent.arrive)+"/"+clazzStudent.clazz.num;
+        this.reportStatus = Report.findByStudent(clazzStudent.student).status.toString();
+        this.reportId = Report.findByStudent(clazzStudent.student).id;
     }
 
 

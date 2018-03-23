@@ -7,10 +7,13 @@ import models.member.AccessToken;
 import models.member.Student;
 import models.member.SysAdmin;
 import models.member.Teacher;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import play.Play;
+import utils.ExcelUtil;
 import vo.*;
 
-import java.security.acl.Group;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -19,6 +22,8 @@ import java.util.List;
  */
 
 public class APIController extends BaseController{
+
+    public static final String BASE_URL = Play.configuration.getProperty("application.baseUrl");
 
 
     /**
@@ -34,6 +39,10 @@ public class APIController extends BaseController{
         renderJSON(Result.succeed(new StudentVO(student)));
     }
 
+
+
+
+    //************************后台***************************
 
 
     /**
@@ -576,6 +585,23 @@ public class APIController extends BaseController{
         renderJSON(Result.succeed(new PageData(ClazzStudentVO.list(clazzStudents))));
     }
 
+
+
+
+    public static void exportStudents(Long clazzId) throws Exception{
+        Clazz clazz = Clazz.findById(clazzId);
+        List<ClazzStudent> clazzStudents = ClazzStudent.findClazz(clazzId);
+        List<ClazzStudentVO> vos = ClazzStudentVO.list(clazzStudents);
+        File templateFile = Play.getFile("documentation/student-list.xls");
+        File resultFile = Play.getFile("/tmp/" +clazz.name+"学生列表"+ ".xls");
+        if (!resultFile.exists()) {
+            FileUtils.copyFile(templateFile, resultFile);
+        }
+        resultFile.setReadable(true, false);
+        resultFile.setWritable(true, false);
+        ExcelUtil.write(resultFile,vos);
+        renderJSON(Result.succeed(new OneValueData(BASE_URL + "/tmp/" + resultFile.getName())));
+    }
 
 
     /**

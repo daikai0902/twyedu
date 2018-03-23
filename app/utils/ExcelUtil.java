@@ -2,6 +2,8 @@ package utils;
 
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import play.Logger;
+import vo.ClazzStudentVO;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -199,5 +201,47 @@ public class ExcelUtil {
 		return str.substring(0, length);
 
 	}
+
+
+
+	public static void write(File file, List<ClazzStudentVO> vos) throws Exception{
+		InputStream is = null;
+		HSSFWorkbook workbook = null;
+		HSSFSheet sheet = null;
+		try {
+			is = new FileInputStream(file);
+			workbook = new HSSFWorkbook(is);
+			// 获取第一个sheet
+			sheet = workbook.getSheetAt(0);
+		} catch (Exception e) {
+			Logger.error("初始化excel有误");
+		}
+		if (sheet != null) {
+			// 写数据
+			FileOutputStream fos = new FileOutputStream(file);
+			int rowIndex = 2;
+			for(ClazzStudentVO vo:vos){
+				sheet.getRow(rowIndex).getCell(0).setCellValue(vo.number);
+				sheet.getRow(rowIndex).getCell(1).setCellValue(vo.name);
+				sheet.getRow(rowIndex).getCell(2).setCellValue(vo.age+"/"+vo.sex);
+				sheet.getRow(rowIndex).getCell(3).setCellValue(vo.clothsize+"/"+vo.shoessize);
+				sheet.getRow(rowIndex).getCell(4).setCellValue(vo.momname+"("+vo.momphone+")"+"\n"+vo.dadname+"("+vo.dadphone+")");
+				sheet.getRow(rowIndex).getCell(5).setCellValue(vo.nursery+"/"+vo.address);
+				sheet.getRow(rowIndex).getCell(6).setCellValue(vo.arrive);
+
+				rowIndex++;
+			}
+			workbook.write(fos);
+			fos.flush();
+			fos.close();
+		}
+		if (null != is) {
+			is.close();
+		}
+	}
+
+
+
+
 
 }

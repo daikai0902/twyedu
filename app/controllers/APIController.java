@@ -499,6 +499,8 @@ public class APIController extends BaseController{
         Student student = Student.findById(studentId);
         Clazz clazz = Clazz.findById(clazzId);
         ClazzStudent.add(clazz,student);
+        //同时新增成绩单
+        Report.add(student,null,null,null);
         renderJSON(Result.succeed());
     }
 
@@ -513,6 +515,47 @@ public class APIController extends BaseController{
     }
 
 
+    /**
+     * 点到
+     * @Date: 13:55 2018/3/23
+     */
+    public static void arrive(Long csId,String arrive){
+        ClazzStudent student = ClazzStudent.findById(csId);
+        student.editArrive(arrive);
+        renderJSON(Result.succeed());
+    }
+
+
+
+    /**
+     * 编辑成绩单
+     * @Date: 14:37 2018/3/23
+     */
+    public static void saveReport(Long studentId,String comment,String starComment,String imgUrls,String status){
+        Student student = Student.findById(studentId);
+        Report report = Report.findByStudent(student);
+        report.edit(comment,starComment,imgUrls, Report.Status.valueOf(status));
+        renderJSON(Result.succeed());
+    }
+
+
+
+    /**
+     * 发送成绩单
+     * @Date: 14:57 2018/3/23
+     */
+    public static void sendReport(Long clazzId){
+        List<Student> students = ClazzStudent.findByClazz(clazzId);
+        Long undoNum = Report.countByStudents(students, Report.Status.已完成);
+        if(students.size() != undoNum){
+            renderJSON(Result.failed(Result.StatusCode.REPORT_NOT_FINISH));
+        }
+        List<Report> reports = Report.fetchByStudents(students);
+        for (Report report:reports){
+            report.setIsSend();
+        }
+        renderJSON(Result.succeed());
+    }
 
 
 

@@ -39,6 +39,7 @@ public class Result {
 		public static final Object[] PERSON_NOT_FOUND = { 50004, "用户不存在" };
 		public static final Object[] PERSON_NOT_ADMIN = { 50005, "用户不是管理员" };
 		public static final Object[] PERSON_NOT_TEACHER = { 50006, "用户不是老师" };
+		public static final Object[] REPORT_NOT_FINISH = { 50007, "还有报告未完成" };
 	}
 
 	public Result() {

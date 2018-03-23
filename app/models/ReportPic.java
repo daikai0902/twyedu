@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
  * @autor kevin.dai
  * @Date 2018/3/21
  */
+@Deprecated
 @Entity
 public class ReportPic extends BaseModel{
 

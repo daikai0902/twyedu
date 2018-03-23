@@ -20,7 +20,7 @@ public class ClazzStudent extends BaseModel {
     public Student student;
 
 
-    public String arrive;//点到情况
+    public String arrive;//点到情况:"1,1,1,0"
 
 
     public static ClazzStudent add(Clazz clazz,Student student){
@@ -35,5 +35,19 @@ public class ClazzStudent extends BaseModel {
     public static List<ClazzStudent> findClazz(Long clazzId){
         return find(getDefaultContitionSql(" clazz.id = ? "),clazzId).fetch();
 
+    }
+
+
+    public static List<Student> findByClazz(Long clazzId){
+        return find("select cs.student from ClazzStudent cs where cs.clazz.isDeleted = 0 and cs.student.isDeleted = 0 " +
+                "   and cs.clazz.id = ? ",clazzId).fetch();
+
+    }
+
+
+    //点到
+    public void editArrive(String arrive){
+        this.arrive = arrive;
+        this.save();
     }
 }

@@ -61,8 +61,6 @@ public class StudentVO extends OneData {
         this.dadname = student.dadname;
         this.dadphone = student.dadphone;
         this.nursery = student.nursery;
-        this.course = student.course;
-        this.isSignup = student.isSignup;
     }
 
 

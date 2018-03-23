@@ -25,14 +25,12 @@ public class Student extends WePerson {
 
 	public String nursery;//幼儿园
 
-	public String course;//课程
 
-	public Boolean isSignup = false;//是否报名
 
 
 
 	public static Student signup(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
-									String momphone,String dadname,String dadphone,String nursery,String address,String course,String remark){
+									String momphone,String dadname,String dadphone,String nursery,String address,String remark){
 
 		Student student = new Student();
 		student.name = name;
@@ -46,9 +44,7 @@ public class Student extends WePerson {
 		student.dadphone = dadphone;
 		student.nursery = nursery;
 		student.address = address;
-		student.course = course;
 		student.remark = remark;
-		student.isSignup = true;
 		return student.save();
 
 

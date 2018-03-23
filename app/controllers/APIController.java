@@ -26,18 +26,45 @@ public class APIController extends BaseController{
     public static final String BASE_URL = Play.configuration.getProperty("application.baseUrl");
 
 
+    public static void getCourses(Long groupId,Boolean isOrder){
+        List<Course> courses = Course.findByCondition(groupId,isOrder);
+        renderJSON(Result.succeed(new PageData(CourseVO.list(courses))));
+    }
+
     /**
      * 报名
      * @Date: 00:30 2018/3/15
      */
     public static void signup(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
-                              String momphone,String dadname,String dadphone,String nursery,String address,String course,String remark){
+                              String momphone,String dadname,String dadphone,String nursery,String address,Long courseId,String payMethod,String remark){
         if(StringUtils.isBlank(name)){
             renderJSON(Result.failed(Result.StatusCode.STUDENT_NAME_NULL));
         }
-        Student student= Student.signup(name,age,sex,clothsize,shoessize,momname,momphone,dadname,dadphone,nursery,address,course,remark);
-        renderJSON(Result.succeed(new StudentVO(student)));
+        Course course = Course.findById(courseId);
+        Student student= Student.signup(name,age,sex,clothsize,shoessize,momname,momphone,dadname,dadphone,nursery,address,remark);
+        CourseStudent cs = CourseStudent.add(course,student, CourseStudent.PayMethod.valueOf(payMethod),"1");
+        renderJSON(Result.succeed(new CourseStudentVO(cs)));
     }
+
+
+
+    /**
+     * 预约
+     * @Date: 02:33 2018/3/24
+     */
+    public static void order(String name,Integer age,String sex,String clothsize,String shoessize,String momname,
+                              String momphone,String dadname,String dadphone,String nursery,String address,Long courseId,String remark){
+        if(StringUtils.isBlank(name)){
+            renderJSON(Result.failed(Result.StatusCode.STUDENT_NAME_NULL));
+        }
+        Course course = Course.findById(courseId);
+        Student student= Student.signup(name,age,sex,clothsize,shoessize,momname,momphone,dadname,dadphone,nursery,address,remark);
+        CourseStudent cs = CourseStudent.add(course,student,null,"2");
+        renderJSON(Result.succeed(new CourseStudentVO(cs)));
+    }
+
+
+
 
 
 

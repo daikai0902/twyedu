@@ -66,7 +66,9 @@ public class Course extends BaseModel{
         return find(getDefaultContitionSql( " group.id = ? "),groupId).fetch();
     }
 
-
+    public static List<Long> findCourseIdsByGroup(Long groupId){
+        return find("select c.id from Course c where c.isDeleted = 0 and c.group.id = ? ",groupId).fetch();
+    }
 
 
     public static List<Course> findByCondition(Long groupId,boolean isOrder){

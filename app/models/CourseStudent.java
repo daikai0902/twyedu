@@ -2,6 +2,7 @@ package models;
 
 import models.member.Student;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -55,6 +56,20 @@ public class CourseStudent extends BaseModel{
     }
 
 
+
+
+    public void setPayStatus(PayStatus status){
+        this.payStatus = status;
+        this.save();
+    }
+
+
+
+    public void setContactStatus(ContactStatus status){
+        this.contactStatus = status;
+        this.save();
+    }
+
     public static  CourseStudent add(Course course,Student student,PayMethod payMethod,String type){
         CourseStudent cs = new CourseStudent();
         cs.course = course;
@@ -73,9 +88,33 @@ public class CourseStudent extends BaseModel{
                 "   and cs.type = ? and cs.course.id = ? and cs.isDeleted = 0 ",type,courseId).fetch();
     }
 
-    public static  List<CourseStudent> findByCourses(List<Course> courses,String type){
-        return find("select cs from CourseStudent cs where cs.student.isDeleted = 0 and cs.course.isDeleted = 0 " +
-                "   and cs.type = ? and cs.course.in(:courses) and cs.isDeleted = 0 order by cs.course ",type).bind("courses",courses.toArray()).fetch();
+
+
+    public static  List<CourseStudent> findByCourses(List<Long> courseIds,String type,Long courseId,String payStatus,String age){
+        StringBuffer sb = new StringBuffer();
+        sb.append(" select cs from CourseStudent cs where cs.student.isDeleted = 0 and cs.course.isDeleted = 0  and  cs.isDeleted = 0 " +
+                " and cs.type = ").append("'"+type+"'");
+        if(StringUtils.isNotBlank(payStatus)){
+            sb.append(" and cs.payStatus = ").append("'"+payStatus+"'");
+        }
+        if(StringUtils.isNotBlank(age)){
+            String[] ages = age.split(",");
+            sb.append(" and cs.student.age > ").append(ages[0]);
+            sb.append(" and cs.student.age < ").append(ages[1]);
+        }
+        if(courseId != null){
+            sb.append(" and cs.course.id = ").append(courseId);
+        }else{
+            sb.append(" and cs.course.id in (");
+            for (int i = 0; i < courseIds.size(); i++) {
+                sb.append(courseIds.get(i));
+                if (i < courseIds.size() - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append(")");
+        }
+        return find(sb.toString()).fetch();
     }
 
 }

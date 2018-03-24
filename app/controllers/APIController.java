@@ -670,8 +670,8 @@ public class APIController extends BaseController{
      * 学生新分配到班
      * @Date: 00:01 2018/3/23
      */
-    public static void addToClazz(Long courseStudentId,Long clazzId){
-        CourseStudent cs = CourseStudent.findById(courseStudentId);
+    public static void addToClazz(Long id,Long clazzId){
+        CourseStudent cs = CourseStudent.findById(id);
         ClazzStudent.add(Clazz.findById(clazzId),cs.student);
         //删除
         cs.logicDelete();
@@ -698,14 +698,40 @@ public class APIController extends BaseController{
      * 微信报名和预约报名
      * @Date: 00:18 2018/3/23
      */
-    public static void wxStudentList(Long groupId,String type){
-        List<Course> courses = Course.findByGroup(groupId);
-        List<CourseStudent> courseStudents = CourseStudent.findByCourses(courses,type);
+    public static void wxStudentList(Long groupId,String type,Long courseId,String payStatus,String age){
+        List<Long> courses = Course.findCourseIdsByGroup(groupId);
+        List<CourseStudent> courseStudents = CourseStudent.findByCourses(courses,type,courseId,payStatus,age);
         renderJSON(Result.succeed(new PageData(CourseStudentVO.list(courseStudents))));
     }
 
 
 
+
+
+
+
+    /**
+     * 修改支付状态
+     * @Date: 21:03 2018/3/24
+     */
+    public static void editPayStatus(Long id,String status){
+        CourseStudent cs = CourseStudent.findById(id);
+        cs.setPayStatus(CourseStudent.PayStatus.valueOf(status));
+        renderJSON(Result.succeed());
+    }
+
+
+
+
+    /**
+     * 修改联系状态
+     * @Date: 21:04 2018/3/24
+     */
+    public static void editContactStatus(Long id,String status){
+        CourseStudent cs = CourseStudent.findById(id);
+        cs.setContactStatus(CourseStudent.ContactStatus.valueOf(status));
+        renderJSON(Result.succeed());
+    }
 
 
     //****************************教师*******************************

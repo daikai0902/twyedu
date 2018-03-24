@@ -77,8 +77,8 @@ POST    /api/student/add                        APIController.addStudent
 *       /api/course/add/clazz                   APIController.addToClazz
 *       /api/course/student/del                 APIController.delFromCourse
 *       /api/course/student/list                APIController.wxStudentList
-
-
+*       /api/course/student/paystatus           APIController.editPayStatus
+*       /api/course/student/contactstatus        APIController.editContactStatus
 
 *       /api/student/arrive                      APIController.arrive
 *       /api/student/report/edit                 APIController.saveReport

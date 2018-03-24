@@ -70,7 +70,10 @@ public class Course extends BaseModel{
 
 
     public static List<Course> findByCondition(Long groupId,boolean isOrder){
-        return find(getDefaultContitionSql( " group.id = ? and isRelease = 1 and  isOrder = ? "),groupId,isOrder).fetch();
+        if(isOrder){
+            return find(getDefaultContitionSql( " group.id = ? and isRelease = 1 and  isOrder = 1 "),groupId).fetch();
+        }else
+            return find(getDefaultContitionSql( " group.id = ? and isRelease = 1"),groupId).fetch();
     }
 
 

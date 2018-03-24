@@ -9,7 +9,8 @@ POST    /api/org/add                            APIController.addOrg
 GET     /api/org/list                           APIController.orgList
 POST    /api/org/del                            APIController.delOrg
 POST    /api/org/edit                           APIController.editOrg
-
+POST    /api/org/pub                            APIController.pubOrg
+GET     /api/org/pub/list                       APIController.getPubOrgs
 
 POST    /api/activity/add                       APIController.addActivity
 POST    /api/activity/link/add                  APIController.addActivityLink

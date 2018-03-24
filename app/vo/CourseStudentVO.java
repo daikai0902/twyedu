@@ -49,7 +49,7 @@ public class CourseStudentVO  extends OneData{
         this.remark = courseStudent.student.remark;
         this.momname = courseStudent.student.momname;
         this.momphone = courseStudent.student.momphone;
-        this.payMethod = courseStudent.payMethod.toString();
+        this.payMethod = courseStudent.payMethod == null?null:courseStudent.payMethod.toString();
         this.payStatus = courseStudent.payStatus.toString();
         this.orderNum = courseStudent.orderNum;
     }

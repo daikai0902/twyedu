@@ -26,6 +26,16 @@ public class APIController extends BaseController{
     public static final String BASE_URL = Play.configuration.getProperty("application.baseUrl");
 
 
+    /**
+     * 公开的网点
+     * @Date: 17:59 2018/3/24
+     */
+    public static void getPubOrgs(){
+        List<OrganizeGroup> groups = OrganizeGroup.fetchAllPub();
+        renderJSON(Result.succeed(new PageData(OrgGroupVO.list(groups))));
+
+    }
+
     public static void getCourses(Long groupId,Boolean isOrder){
         List<Course> courses = Course.findByCondition(groupId,isOrder);
         renderJSON(Result.succeed(new PageData(CourseVO.list(courses))));
@@ -123,6 +133,18 @@ public class APIController extends BaseController{
     public static void delOrg(Long groupId){
         OrganizeGroup group = OrganizeGroup.findById(groupId);
         group.logicDelete();
+        renderJSON(Result.succeed());
+    }
+
+
+
+    /**
+     * 公开网点
+     * @Date: 17:39 2018/3/24
+     */
+    public static void pubOrg(Long groupId,boolean status){
+        OrganizeGroup group = OrganizeGroup.findById(groupId);
+        group.setIspublic(status);
         renderJSON(Result.succeed());
     }
 
@@ -676,9 +698,9 @@ public class APIController extends BaseController{
      * 微信报名和预约报名
      * @Date: 00:18 2018/3/23
      */
-    public static void wxStudentList(Long courseId,String type){
-        List<CourseStudent> courseStudents = CourseStudent.findByCourse(courseId,type);
-        renderJSON(Result.succeed(new PageData(CourseStudentVO.list(courseStudents))));
+    public static void wxStudentList(Long groupId,String type){
+        List<Course> courses = Course.findByGroup(groupId);
+        renderJSON(Result.succeed(new PageData(CourseVO.listStudents(courses,type))));
     }
 
 

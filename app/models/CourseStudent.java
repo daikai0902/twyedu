@@ -61,7 +61,7 @@ public class CourseStudent extends BaseModel{
         cs.student = student;
         cs.type = type;
         cs.payMethod = payMethod;
-        if(!payMethod.equals(PayMethod.微信)){
+        if(payMethod != null && !payMethod.equals(PayMethod.微信)){
           cs.orderNum = RandomStringUtils.randomAlphanumeric(6);
         }
         return cs.save();

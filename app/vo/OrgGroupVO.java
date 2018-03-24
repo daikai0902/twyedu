@@ -28,6 +28,8 @@ public class OrgGroupVO extends OneData{
 
     public int indexOrder;
 
+    public boolean ispublic;
+
 
     public OrgGroupVO(){
 
@@ -41,6 +43,7 @@ public class OrgGroupVO extends OneData{
         this.address = group.address;
         this.telphone = group.telphone;
         this.groupId = group.id;
+        this.ispublic = group.ispublic;
         GroupPerson groupPerson = GroupPerson.findAdminbyGroup(group);
         if(groupPerson != null && groupPerson.person != null){
             this.adminId = groupPerson.person.id;

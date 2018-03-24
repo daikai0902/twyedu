@@ -26,6 +26,8 @@ public class OrganizeGroup extends BaseModel{
 
     public int indexOrder;
 
+    public Boolean ispublic = false;
+
 
     public static OrganizeGroup add(String name,String address,String telphone){
         OrganizeGroup group = new OrganizeGroup();
@@ -57,11 +59,19 @@ public class OrganizeGroup extends BaseModel{
 
 
 
+    public void setIspublic(boolean status){
+        this.ispublic = status;
+        this.save();
+    }
+
+
     public static List<OrganizeGroup> fetchAll(){
         return find(defaultCondition()).fetch();
     }
 
-
+    public static List<OrganizeGroup> fetchAllPub(){
+        return find(getDefaultContitionSql( " ispublic = 1 ")).fetch();
+    }
 
 
 

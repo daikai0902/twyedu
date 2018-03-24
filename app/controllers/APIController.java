@@ -638,7 +638,10 @@ public class APIController extends BaseController{
 
 
 
-
+    /**
+     * 导出学生
+     * @Date: 21:52 2018/3/24
+     */
     public static void exportStudents(Long clazzId) throws Exception{
         Clazz clazz = Clazz.findById(clazzId);
         List<ClazzStudent> clazzStudents = ClazzStudent.findClazz(clazzId);

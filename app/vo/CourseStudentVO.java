@@ -2,6 +2,7 @@ package vo;
 
 import models.CourseStudent;
 import org.apache.commons.lang.BooleanUtils;
+import utils.ComUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -38,9 +39,16 @@ public class CourseStudentVO  extends OneData{
 
     public String orderNum;
 
+    public String courseName;
+
+    public Long courseId;
+
+
 
 
     public CourseStudentVO(CourseStudent courseStudent){
+        this.courseName = courseStudent.course.name;
+        this.courseId = courseStudent.course.id;
         this.id = courseStudent.id;
         this.name = courseStudent.student.name;
         this.age = courseStudent.student.age;
@@ -52,6 +60,7 @@ public class CourseStudentVO  extends OneData{
         this.payMethod = courseStudent.payMethod == null?null:courseStudent.payMethod.toString();
         this.payStatus = courseStudent.payStatus.toString();
         this.orderNum = courseStudent.orderNum;
+        this.createTime = ComUtils.formatDate(courseStudent.createTime,"yyyy-MM-dd");
     }
 
 

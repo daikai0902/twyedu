@@ -30,7 +30,6 @@ public class CourseVO extends OneData {
     public List<ClazzVO> clazzs;
 
 
-    public List<CourseStudentVO> students;
 
 
     public CourseVO(){
@@ -62,16 +61,6 @@ public class CourseVO extends OneData {
     }
 
 
-    public CourseVO(Course course, List<CourseStudent> courseStudents,String type){
-        this.id = course.id;
-        this.groupId = course.group.id;
-        this.name = course.name;
-        this.feeType = course.feeType;
-        this.fee = course.fee;
-        this.release = course.isRelease;
-        this.order = course.isOrder;
-        this.students = CourseStudentVO.list(courseStudents);
-    }
 
 
 
@@ -93,14 +82,4 @@ public class CourseVO extends OneData {
 
 
 
-    /**
-     * 后期学生数据量大可以优化，减少sql链接数
-     * @Date: 19:21 2018/3/24
-     */
-    public static List<CourseVO> listStudents(List<Course> courses,String type){
-        if(courses.isEmpty()){
-            return Collections.emptyList();
-        }
-        return courses.stream().map(c -> new CourseVO(c,CourseStudent.findByCourse(c.id,type),null)).collect(Collectors.toList());
-    }
 }

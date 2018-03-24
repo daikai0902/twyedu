@@ -70,9 +70,12 @@ public class CourseStudent extends BaseModel{
 
     public static  List<CourseStudent> findByCourse(Long courseId,String type){
         return find("select cs from CourseStudent cs where cs.student.isDeleted = 0 and cs.course.isDeleted = 0 " +
-                "   and cs.type = ? and cs.course.id = ? ",type,courseId).fetch();
+                "   and cs.type = ? and cs.course.id = ? and cs.isDeleted = 0 ",type,courseId).fetch();
     }
 
-
+    public static  List<CourseStudent> findByCourses(List<Course> courses,String type){
+        return find("select cs from CourseStudent cs where cs.student.isDeleted = 0 and cs.course.isDeleted = 0 " +
+                "   and cs.type = ? and cs.course.in(:courses) and cs.isDeleted = 0 order by cs.course ",type).bind("courses",courses.toArray()).fetch();
+    }
 
 }

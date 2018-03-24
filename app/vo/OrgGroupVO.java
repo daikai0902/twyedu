@@ -26,6 +26,8 @@ public class OrgGroupVO extends OneData{
 
     public String adminName;
 
+    public String adminPwd;
+
     public int indexOrder;
 
     public boolean ispublic;
@@ -48,6 +50,7 @@ public class OrgGroupVO extends OneData{
         if(groupPerson != null && groupPerson.person != null){
             this.adminId = groupPerson.person.id;
             this.adminName = groupPerson.person.name;
+            this.adminPwd = groupPerson.person.password;
         }
     }
 

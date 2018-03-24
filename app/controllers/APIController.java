@@ -700,7 +700,8 @@ public class APIController extends BaseController{
      */
     public static void wxStudentList(Long groupId,String type){
         List<Course> courses = Course.findByGroup(groupId);
-        renderJSON(Result.succeed(new PageData(CourseVO.listStudents(courses,type))));
+        List<CourseStudent> courseStudents = CourseStudent.findByCourses(courses,type);
+        renderJSON(Result.succeed(new PageData(CourseStudentVO.list(courseStudents))));
     }
 
 

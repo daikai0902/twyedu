@@ -618,11 +618,14 @@ public class APIController extends BaseController{
      * 删除学生
      * @Date: 22:10 2018/3/23
      */
-    public  static void deletStudent(Long id){
+    public static void deletStudent(Long id){
         ClazzStudent cs = ClazzStudent.findById(id);
         cs.logicDelete();
         renderJSON(Result.succeed());
     }
+
+
+
 
 
 
@@ -690,8 +693,8 @@ public class APIController extends BaseController{
      * 从报名的课程里删除
      * @Date: 23:01 2018/3/23
      */
-    public static void delFromCourse(Long courseStudentId){
-        CourseStudent cs = CourseStudent.findById(courseStudentId);
+    public static void delFromCourse(Long id){
+        CourseStudent cs = CourseStudent.findById(id);
         cs.logicDelete();
         renderJSON(Result.succeed());
     }

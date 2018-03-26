@@ -27,11 +27,13 @@ public class Teacher extends WePerson {
 		teacher.cellPhone = cellphone;
 		teacher.IDcard = IDcard;
 		teacher.imgUrl = imgUrl;
-		teacher.password = StringUtils.substring(IDcard,0,11);
+		teacher.password = StringUtils.substring(IDcard,12,18);
 		teacher.save();
 		teacher.number = "T"+ ComUtils.formatDate(teacher.createTime,"yyMMdd")+ new DecimalFormat("0000").format(teacher.id);
 		return teacher.save();
 	}
+
+
 
 
 

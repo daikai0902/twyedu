@@ -30,7 +30,7 @@ public class OrgGroupVO extends OneData{
 
     public int indexOrder;
 
-    public boolean ispublic;
+    public Boolean ispublic;
 
 
     public OrgGroupVO(){

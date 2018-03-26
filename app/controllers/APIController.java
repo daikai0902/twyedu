@@ -746,8 +746,8 @@ public class APIController extends BaseController{
      * 点到
      * @Date: 13:55 2018/3/23
      */
-    public static void arrive(Long csId,String arrive){
-        ClazzStudent student = ClazzStudent.findById(csId);
+    public static void arrive(Long id,String arrive){
+        ClazzStudent student = ClazzStudent.findById(id);
         student.editArrive(arrive);
         renderJSON(Result.succeed());
     }

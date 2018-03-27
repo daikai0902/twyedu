@@ -54,6 +54,8 @@ public class ClazzStudentVO extends OneData {
 
     public Long reportId;
 
+    public Long studentId;
+
 
 
 
@@ -66,6 +68,7 @@ public class ClazzStudentVO extends OneData {
     public ClazzStudentVO(ClazzStudent clazzStudent){
         this.id = clazzStudent.id;
         this.number = clazzStudent.student.number;
+        this.studentId = clazzStudent.student.id;
         this.name = clazzStudent.student.name;
         this.age = clazzStudent.student.age;
         this.sex = BooleanUtils.toString(clazzStudent.student.sex,"女","男");

@@ -1,5 +1,6 @@
 package vo;
 
+import models.ClazzStudent;
 import models.Report;
 
 /**
@@ -9,7 +10,9 @@ import models.Report;
 public class ReportVO extends OneData {
 
 
+    public String clazzName;
 
+    public String studentNum;
 
     public String studentName;
 
@@ -40,6 +43,8 @@ public class ReportVO extends OneData {
     public ReportVO(Report report){
         this.id = report.id;
         this.studentName = report.student.name;
+        this.clazzName  = ClazzStudent.findByStudent(report.student.id).clazz.name;
+        this.studentNum = report.student.number;
         this.studentId = report.student.id;
         this.comment = report.comment;
         this.starComment = report.starComment;

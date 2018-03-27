@@ -43,6 +43,11 @@ public class ClazzStudent extends BaseModel {
     }
 
 
+    public static ClazzStudent findByStudent(Long studentId){
+        return find(getDefaultContitionSql(" student.id = ? "),studentId).first();
+    }
+
+
     public static List<Student> findByClazz(Long clazzId){
         return find("select cs.student from ClazzStudent cs where cs.clazz.isDeleted = 0 and cs.student.isDeleted = 0 " +
                 "   and cs.clazz.id = ? ",clazzId).fetch();

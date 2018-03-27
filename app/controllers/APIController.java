@@ -762,7 +762,19 @@ public class APIController extends BaseController{
         Student student = Student.findById(studentId);
         Report report = Report.findByStudent(student);
         report.edit(comment,starComment,imgUrls, Report.Status.valueOf(status));
-        renderJSON(Result.succeed());
+        renderJSON(Result.succeed(new ReportVO(report)));
+    }
+
+
+
+
+    /**
+     * 成绩单详情
+     * @Date: 22:00 2018/3/27
+     */
+    public static void report(Long studentId){
+        Report  report = Report.findByStudent(Student.findById(studentId));
+        renderJSON(Result.succeed(new ReportVO(report)));
     }
 
 

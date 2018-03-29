@@ -47,6 +47,9 @@ public class Report extends BaseModel {
 
 
     public static Long countByStudents(List<Student> students,Status status){
+        if(students.isEmpty()){
+            return 0l;
+        }
         return find("select count(r) from Report r where  r.status = ? and r.student in(:students) ",status).bind("students",students.toArray()).first();
     }
 

@@ -517,6 +517,13 @@ public class APIController extends BaseController{
     }
 
 
+    public static void editTeacher(Long teacherId,String name,String cellphone,String IDcard,String imgUrl){
+        Teacher teacher = Teacher.findById(teacherId);
+        teacher.edit(name,cellphone,IDcard,imgUrl);
+        renderJSON(Result.succeed());
+    }
+
+
 
     /**
      * 删除老师

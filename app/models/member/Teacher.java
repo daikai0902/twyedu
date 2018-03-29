@@ -35,6 +35,16 @@ public class Teacher extends WePerson {
 
 
 
+	public void edit(String name,String cellphone,String IDcard,String imgUrl){
+		this.name = name;
+		this.cellPhone  = cellphone;
+		this.IDcard = IDcard;
+		this.imgUrl = imgUrl;
+		this.save();
+	}
+
+
+
 
 
 

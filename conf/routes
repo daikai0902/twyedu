@@ -57,6 +57,7 @@ POST    /api/course/order                       APIController.orderCourse
 
 
 POST    /api/teacher/add                        APIController.addTeacher
+*       /api/teacher/edit                       APIController.editTeacher
 *       /api/teacher/list                       APIController.teacherList
 *       /api/teacher/del                        APIController.delTeacher
 *       /api/teacher/clazz                      APIController.teacherClazzs

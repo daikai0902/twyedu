@@ -1,5 +1,8 @@
 package controllers;
 
+import com.baidu.ueditor.define.ActionMap;
+import com.baidu.ueditor.define.AppInfo;
+import com.baidu.ueditor.define.BaseState;
 import models.*;
 import models.group.GroupPerson;
 import models.group.OrganizeGroup;
@@ -8,12 +11,16 @@ import models.member.Student;
 import models.member.SysAdmin;
 import models.member.Teacher;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
+import play.Logger;
 import play.Play;
 import utils.ExcelUtil;
+import utils.PictureUtils;
 import vo.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -796,6 +803,55 @@ public class APIController extends BaseController{
         renderJSON(Result.succeed());
     }
 
+
+
+    /**
+     * 上传文件
+     * @Date: 22:02 2018/3/29
+     */
+    public static void upload(File file){
+        URLResult result = PictureUtils.uploadImage(file);
+        if(result == null){
+            renderJSON("上传失败！");
+        }
+        renderJSON(result.html);
+    }
+
+
+
+    /**
+     * 给UEditor使用的统一通道
+     */
+    public static void uEditor(String action, File upfile) {
+        action = StringUtils.substring(action, 9);
+        switch (ActionMap.getType(action)) {
+            case ActionMap.CONFIG:
+                try {
+                    renderJSON(FileUtils.readFileToString(Play.getFile("public/js/ueditor/config.json")));
+                } catch (IOException e) {
+                    Logger.error(e, e.getMessage());
+                }
+
+            case ActionMap.UPLOAD_IMAGE:
+                String origin = PictureUtils.uploadImage(upfile).html;
+                String preview = PictureUtils.getPictureFromPicServer(1000, 0, PictureUtils.Effect.PURE, origin);
+                String suffix = FilenameUtils.getPrefix(preview);
+                BaseState state = new BaseState(true);
+                state.putInfo("size", upfile.length());
+                state.putInfo("title", upfile.getName());
+                state.putInfo("url", preview);
+                state.putInfo("type", suffix);
+                state.putInfo("original", upfile.getName());
+                renderJSON(state.toJSONString());
+            case ActionMap.UPLOAD_SCRAWL:
+            case ActionMap.UPLOAD_VIDEO:
+            case ActionMap.UPLOAD_FILE:
+            case ActionMap.CATCH_IMAGE:
+            case ActionMap.LIST_IMAGE:
+            case ActionMap.LIST_FILE:
+                renderJSON(new BaseState(false, AppInfo.INVALID_ACTION).toJSONString());
+        }
+    }
 
 
 

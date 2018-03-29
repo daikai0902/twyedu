@@ -105,14 +105,16 @@ public class CourseStudent extends BaseModel{
         if(courseId != null){
             sb.append(" and cs.course.id = ").append(courseId);
         }else{
-            sb.append(" and cs.course.id in (");
-            for (int i = 0; i < courseIds.size(); i++) {
-                sb.append(courseIds.get(i));
-                if (i < courseIds.size() - 1) {
-                    sb.append(",");
+            if(courseIds != null && courseIds.size() > 0 ){
+                sb.append(" and cs.course.id in (");
+                for (int i = 0; i < courseIds.size(); i++) {
+                    sb.append(courseIds.get(i));
+                    if (i < courseIds.size() - 1) {
+                        sb.append(",");
+                    }
                 }
+                sb.append(")");
             }
-            sb.append(")");
         }
         return find(sb.toString()).fetch();
     }

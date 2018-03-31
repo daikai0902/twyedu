@@ -834,7 +834,7 @@ public class APIController extends BaseController{
         switch (ActionMap.getType(action)) {
             case ActionMap.CONFIG:
                 try {
-                    renderJSON(FileUtils.readFileToString(Play.getFile("public/config.json")));
+                    renderJSON(FileUtils.readFileToString(Play.getFile("public/config1.json")));
                 } catch (IOException e) {
                     Logger.error(e, e.getMessage());
                 }

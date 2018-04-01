@@ -189,8 +189,8 @@ public class APIController extends BaseController{
      * 新增活动
      * @Date: 16:18 2018/3/17
      */
-    public static void addActivity(String name,String time,String address,String desc,String content,String videoUrl){
-        Activity activity =  Activity.add(name,time,address,content,desc,videoUrl);
+    public static void addActivity(String name,String time,String address,String remark,String content,String videoUrl){
+        Activity activity =  Activity.add(name,time,address,content,remark,videoUrl);
         renderJSON(Result.succeed(new ActivityVO(activity)));
     }
 
@@ -222,9 +222,9 @@ public class APIController extends BaseController{
      * 编辑活动
      * @Date: 16:18 2018/3/17
      */
-    public static void editActivity(Long activityId,String name,String time,String address,String content,String desc,String videoUrl){
+    public static void editActivity(Long activityId,String name,String time,String address,String content,String remark,String videoUrl){
         Activity activity = Activity.findById(activityId);
-        activity.edit(name,time,address,content,desc,videoUrl);
+        activity.edit(name,time,address,content,remark,videoUrl);
         renderJSON(Result.succeed(new ActivityVO(activity)));
     }
 
@@ -373,8 +373,8 @@ public class APIController extends BaseController{
      * 新增新闻
      * @Date: 16:18 2018/3/17
      */
-    public static void addNews(String name,String content,String desc,String videoUrl){
-        News news =  News.add(name,content,desc,videoUrl);
+    public static void addNews(String name,String content,String remark,String videoUrl){
+        News news =  News.add(name,content,remark,videoUrl);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 
@@ -406,9 +406,9 @@ public class APIController extends BaseController{
      * 编辑新闻
      * @Date: 16:18 2018/3/17
      */
-    public static void editNews(Long newsId,String name,String content,String desc,String videoUrl){
+    public static void editNews(Long newsId,String name,String content,String remark,String videoUrl){
         News news = News.findById(newsId);
-        news.edit(name,content,desc,videoUrl);
+        news.edit(name,content,remark,videoUrl);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 

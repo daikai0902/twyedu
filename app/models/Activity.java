@@ -23,7 +23,7 @@ public class Activity extends BaseModel{
     public String content;
 
     @Lob
-    public String desc;
+    public String remark;
 
     public String videoUrl;
 
@@ -35,12 +35,12 @@ public class Activity extends BaseModel{
 
 
 
-    public static Activity add(String name,String time,String address,String content,String desc,String videoUrl){
+    public static Activity add(String name,String time,String address,String content,String remark,String videoUrl){
         Activity activity = new Activity();
         activity.name = name;
         activity.time = time;
         activity.address = address;
-        activity.desc = desc;
+        activity.remark = remark;
         activity.content = content;
         activity.videoUrl = videoUrl;
         activity.type = "1";
@@ -59,13 +59,13 @@ public class Activity extends BaseModel{
 
 
 
-    public void edit(String name,String time,String address,String content,String desc,String videoUrl){
+    public void edit(String name,String time,String address,String content,String remark,String videoUrl){
         this.name = name;
         this.time = time;
         this.address = address;
         this.content = content;
         this.videoUrl = videoUrl;
-        this.desc = desc;
+        this.remark = remark;
         this.save();
     }
 

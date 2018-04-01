@@ -18,7 +18,7 @@ public class News extends BaseModel{
     public String content;
 
     @Lob
-    public String desc;
+    public String remark;
 
     public String videoUrl;
 
@@ -30,11 +30,11 @@ public class News extends BaseModel{
 
 
 
-    public static News add(String name,String content,String desc, String videoUrl){
+    public static News add(String name,String content,String remark, String videoUrl){
         News news = new News();
         news.name = name;
         news.content = content;
-        news.desc = desc;
+        news.remark = remark;
         news.videoUrl = videoUrl;
         news.type = "1";
         return news.save();
@@ -52,10 +52,10 @@ public class News extends BaseModel{
 
 
 
-    public void edit(String name,String content,String desc, String videoUrl){
+    public void edit(String name,String content,String remark, String videoUrl){
         this.name = name;
         this.content = content;
-        this.desc = desc;
+        this.remark = remark;
         this.videoUrl = videoUrl;
         this.save();
     }

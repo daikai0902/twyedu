@@ -254,6 +254,17 @@ public class APIController extends BaseController{
 
 
 
+    /**
+     * 活动详情
+     * @Date: 12:37 2018/4/1
+     */
+    public static void activityDetail(Long activityId){
+        Activity activity = Activity.findById(activityId);
+        renderJSON(Result.succeed(new ActivityVO(activity)));
+    }
+
+
+
 
     /**
      * 名师新增

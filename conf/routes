@@ -18,6 +18,7 @@ POST    /api/activity/del                       APIController.delActivity
 POST    /api/activity/edit                      APIController.editActivity
 POST    /api/activity/link/edit                 APIController.editActivityLink
 *       /api/activity/list                      APIController.activityList
+*       /api/activity/detail                    APIController.activityDetail
 
 
 POST    /api/news/add                           APIController.addNews

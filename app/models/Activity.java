@@ -80,7 +80,7 @@ public class Activity extends BaseModel{
 
 
     public static List<Activity> fetchAll(){
-        return Activity.find(defaultCondition()).fetch();
+        return Activity.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch();
     }
 
 }

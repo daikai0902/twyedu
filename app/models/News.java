@@ -71,7 +71,7 @@ public class News extends BaseModel{
 
 
     public static List<News> fetchAll(){
-        return News.find(defaultCondition()).fetch();
+        return News.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch();
     }
 
 }

@@ -26,6 +26,7 @@ POST    /api/news/del                           APIController.delNews
 POST    /api/news/edit                          APIController.editNews
 POST    /api/news/link/edit                     APIController.editNewsLink
 *       /api/news/list                          APIController.newsList
+*       /api/news/detail                        APIController.newsDetail
 
 
 POST    /api/show/clazz/add                     APIController.addShowOpenClazz

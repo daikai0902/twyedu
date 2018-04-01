@@ -426,6 +426,16 @@ public class APIController extends BaseController{
     }
 
 
+    /**
+     * 新闻详情
+     * @Date: 12:29 2018/4/1
+     */
+    public static void newsDetail(Long newsId){
+        News news = News.findById(newsId);
+        renderJSON(Result.succeed(new NewsVO(news)));
+    }
+
+
     //************************网点管理****************************************
 
 

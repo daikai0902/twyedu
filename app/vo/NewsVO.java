@@ -18,6 +18,8 @@ public class NewsVO extends OneData{
 
     public String content;
 
+    public String desc;
+
     public String videoUrl;
 
     public String link;
@@ -38,6 +40,7 @@ public class NewsVO extends OneData{
         this.videoUrl = news.videoUrl;
         this.link = news.link;
         this.type = news.type;
+        this.desc = news.desc;
         this.createTime = ComUtils.formatDate(news.createTime,"yyyy年MM月dd日");
     }
 

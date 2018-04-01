@@ -23,6 +23,8 @@ public class ActivityVO extends OneData{
 
     public String content;
 
+    public String desc;
+
     public String videoUrl;
 
     public String link;
@@ -41,6 +43,7 @@ public class ActivityVO extends OneData{
         this.time = activity.time;
         this.address = activity.address;
         this.content = activity.content;
+        this.desc = activity.desc;
         this.videoUrl = activity.videoUrl;
         this.link = activity.link;
         this.type = activity.type;

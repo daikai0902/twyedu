@@ -20,7 +20,9 @@ public class ComUtils {
         return JavaExtensions.format(new Date(date),format);
     }
 
-
+    public static String formatDate(Date date,String format){
+        return JavaExtensions.format(date,format);
+    }
 
     public static String formatNumber(Number number, String format) {
         return JavaExtensions.format(number, format);

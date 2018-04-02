@@ -3,11 +3,13 @@ package models;
 import models.member.Student;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
+import utils.ComUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,6 +58,15 @@ public class CourseStudent extends BaseModel{
     }
 
 
+
+    /**
+     * 生成订单号
+     */
+    public void genOrderNum() {
+        this.orderNum = ComUtils.formatDate(new Date(), "yyyyMMddHHmmss")
+                + ComUtils.formatNumber(id, "000000000");
+        this.save();
+    }
 
 
     public void setPayStatus(PayStatus status){

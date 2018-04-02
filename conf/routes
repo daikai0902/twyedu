@@ -96,4 +96,10 @@ POST    /api/student/add                        APIController.addStudent
 
 *       /api/{action}                           APIController.{action}
 
+
+
+
+*       /wx/{action}                            WeChatController.{action}
+
+
 *       /{controller}/{action}                  {controller}.{action}

@@ -8,6 +8,8 @@ import play.mvc.Http;
 import play.mvc.Scope;
 import play.templates.JavaExtensions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -44,6 +46,17 @@ public class ComUtils {
             ip = ip.substring(0, ip.indexOf(","));
         }
         return ip;
+    }
+
+
+    public static Date getDate(String dateStr, String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        try {
+            return formatter.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

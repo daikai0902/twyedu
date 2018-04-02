@@ -13,31 +13,31 @@ import java.util.Date;
 public class WeChatMember extends BaseModel {
 
 	public String openId;// 唯一对应微信的用户OpenId
-	public String nickName;
-	public String avatarURL;
-	public String city;
-	public String country;
-	public String province;
-	public String language;
-	public Date subscribeTime;
-	public boolean hasSubscribed;
-	@Enumerated(EnumType.STRING)
-	public Sex sex;
-	private String vipSerial;// 会员ID
 
-	public enum Sex {
-		Female, Male, Unknown
+	public String studentIds;
+
+
+
+	public static WeChatMember add(String openId){
+		WeChatMember member = new WeChatMember();
+		member.openId = openId;
+		return member.save();
 	}
 
+
+	public void setStudentIds(String studentIds){
+		this.studentIds = studentIds;
+		this.save();
+	}
+
+
+
 	public static WeChatMember findByOpenId(String openId) {
-		WeChatMember member = null;
-		member = find(getDefaultContitionSql("openId=?"), openId).first();
+		WeChatMember member =  find(getDefaultContitionSql("openId=?"), openId).first();
 		return member;
 	}
 
-	public static WeChatMember findMemberById(long memberId) {
-		return find(getDefaultContitionSql("id=?"), memberId).first();
-	}
+
 
 
 }

@@ -26,6 +26,8 @@ public class NewsVO extends OneData{
 
     public String type;//"1:普通 2:链接"
 
+    public String imgUrl;
+
 
 
     public NewsVO(){
@@ -41,6 +43,7 @@ public class NewsVO extends OneData{
         this.link = news.link;
         this.type = news.type;
         this.remark = news.remark;
+        this.imgUrl = news.imgUrl;
         this.createTime = ComUtils.formatDate(news.createTime,"yyyy年MM月dd日");
     }
 

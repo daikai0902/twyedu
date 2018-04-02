@@ -31,6 +31,8 @@ public class ActivityVO extends OneData{
 
     public String type;//"1:普通 2:链接"
 
+    public String imgUrl;
+
 
     public ActivityVO(){
 
@@ -47,6 +49,7 @@ public class ActivityVO extends OneData{
         this.videoUrl = activity.videoUrl;
         this.link = activity.link;
         this.type = activity.type;
+        this.imgUrl = activity.imgUrl;
     }
 
 

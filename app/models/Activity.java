@@ -31,11 +31,13 @@ public class Activity extends BaseModel{
 
     public String type;//"1:普通 2:链接"
 
+    public String imgUrl;
 
 
 
 
-    public static Activity add(String name,String time,String address,String content,String remark,String videoUrl){
+
+    public static Activity add(String name,String time,String address,String content,String remark,String videoUrl,String imgUrl){
         Activity activity = new Activity();
         activity.name = name;
         activity.time = time;
@@ -43,37 +45,41 @@ public class Activity extends BaseModel{
         activity.remark = remark;
         activity.content = content;
         activity.videoUrl = videoUrl;
+        activity.imgUrl = imgUrl;
         activity.type = "1";
         return activity.save();
     }
 
 
 
-    public static Activity addLink(String name,String link){
+    public static Activity addLink(String name,String link,String imgUrl){
         Activity activity = new Activity();
         activity.name = name;
         activity.link = link;
         activity.type = "2";
+        activity.imgUrl = imgUrl;
         return activity.save();
     }
 
 
 
-    public void edit(String name,String time,String address,String content,String remark,String videoUrl){
+    public void edit(String name,String time,String address,String content,String remark,String videoUrl,String imgUrl){
         this.name = name;
         this.time = time;
         this.address = address;
         this.content = content;
         this.videoUrl = videoUrl;
+        this.imgUrl  = imgUrl;
         this.remark = remark;
         this.save();
     }
 
 
 
-    public void editLink(String name,String link){
+    public void editLink(String name,String link,String imgUrl){
         this.name = name;
         this.link = link;
+        this.imgUrl = imgUrl;
         this.save();
     }
 

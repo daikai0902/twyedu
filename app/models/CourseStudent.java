@@ -133,6 +133,7 @@ public class CourseStudent extends BaseModel{
                 sb.append(")");
             }
         }
+        sb.append(" order by cs.createTime desc ");
         return find(sb.toString()).fetch();
     }
 

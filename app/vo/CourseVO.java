@@ -19,7 +19,7 @@ public class CourseVO extends OneData {
 
     public String name;
 
-    public String feeType = "1";//收费方式 0 ：按课时算，1：按学期算
+    public String feeType = "1";//收费方式 0 ：按课时算，1：按学期算 2:预约面试
 
     public String fee;//金额
 

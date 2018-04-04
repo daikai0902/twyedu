@@ -98,7 +98,8 @@ POST    /api/student/add                        APIController.addStudent
 
 *       /api/{action}                           APIController.{action}
 
-
+*       /wx/openid                              WeChatController.getOpenId
+*       /wx/bind/student                        WeChatController.bindStudent
 
 
 *       /wx/{action}                            WeChatController.{action}

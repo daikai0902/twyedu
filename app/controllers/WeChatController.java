@@ -3,9 +3,14 @@ package controllers;
 import com.google.gson.Gson;
 import models.CourseStudent;
 import models.PayNotify;
+import models.WeChatMember;
+import models.member.Student;
+import org.apache.commons.lang.StringUtils;
+import utils.WeChatUtils;
 import utils.XMLUtil;
 import vo.OrderResult;
 import vo.Result;
+import vo.WeChatMemberVO;
 
 /**
  * @autor kevin.dai
@@ -29,6 +34,40 @@ public class WeChatController extends BaseController{
         } else {
             renderJSON("fail");
         }
+
+    }
+
+
+
+    public static void getOpenId(String code){
+        if(StringUtils.isBlank(code)){
+            renderJSON(Result.failed(Result.StatusCode.NULL_WX_CODE));
+        }
+        String openId =  WeChatUtils.getOAuthOpenIdFromRemote(code);
+        WeChatMember chatMember = WeChatMember.findByOpenId(openId);
+        if (chatMember == null){
+            chatMember = WeChatMember.add(openId);
+        }
+        renderJSON(Result.succeed(new WeChatMemberVO(chatMember)));
+    }
+
+
+
+    public  static void bindStudent(String openId,String number){
+        Student student =Student.findByNum(number);
+        if(student == null){
+            renderJSON(Result.failed(Result.StatusCode.STUDENT_NOT_EXITS));
+        }
+        WeChatMember chatMember =WeChatMember.findByOpenId(openId);
+        if(chatMember != null){
+            if(StringUtils.isNotBlank(chatMember.studentIds)){
+                String studentIds = chatMember.studentIds+","+student.id;
+                chatMember.setStudentIds(studentIds);
+            }else {
+                chatMember.setStudentIds(student.id+"");
+            }
+        }
+        renderJSON(Result.succeed(new WeChatMemberVO(chatMember)));
 
     }
 

@@ -27,7 +27,7 @@ public class WeChatUtils {
 
     public static  final  String merchId = "1500074842";
 
-    public static final String apiKey = "";
+    public static final String apiKey = "twyxedu88269588twyxedu88269588dk";
 
     public static final String notify_url = APPLICATION_URL + "/wx/payNotify";
 

@@ -312,12 +312,21 @@ public class APIController extends BaseController{
 
 
 
-
-    public static void addShowOpenClazz(String name,String time,String address,String content,String videoUrl){
-        ShowOpenClazz showOpenClazz =  ShowOpenClazz.add(name,time,address,content,videoUrl);
+    /**
+     * 公开课
+     * @Date: 20:58 2018/4/4
+     */
+    public static void addShowOpenClazz(String name,String time,String address,String content,String videoUrl,String remark,String imgUrl){
+        ShowOpenClazz showOpenClazz =  ShowOpenClazz.add(name,time,address,content,videoUrl,remark,imgUrl);
         renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
     }
 
+
+
+    public static void addShowOpenClazzLink(String name,String link,String imgUrl){
+        ShowOpenClazz showOpenClazz =  ShowOpenClazz.addLink(name, link,imgUrl);
+        renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
+    }
 
 
     public static void delShowOpenClazz(Long showId){
@@ -327,9 +336,16 @@ public class APIController extends BaseController{
     }
 
 
-    public static void editShowOpenClazz(Long showId,String name,String time,String address,String content,String videoUrl){
+    public static void editShowOpenClazz(Long showId,String name,String time,String address,String content,String videoUrl,String remark,String imgUrl){
         ShowOpenClazz showOpenClazz = ShowOpenClazz.findById(showId);
-        showOpenClazz.edit(name,time,address,content,videoUrl);
+        showOpenClazz.edit(name,time,address,content,videoUrl,remark,imgUrl);
+        renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
+    }
+
+
+    public static void editShowOpenClazzLink(Long showId,String name,String link,String imgUrl){
+        ShowOpenClazz showOpenClazz = ShowOpenClazz.findById(showId);
+        showOpenClazz.editLink(name,link,imgUrl);
         renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
     }
 

@@ -31,8 +31,10 @@ POST    /api/news/link/edit                     APIController.editNewsLink
 
 
 POST    /api/show/clazz/add                     APIController.addShowOpenClazz
+POST    /api/show/clazz/link/add                APIController.addShowOpenClazzLink
 POST    /api/show/clazz/del                     APIController.delShowOpenClazz
 POST    /api/show/clazz/edit                    APIController.editShowOpenClazz
+POST    /api/show/clazz/link/edit               APIController.editShowOpenClazzLink
 *       /api/show/clazz/list                    APIController.showOpenClazzList
 
 

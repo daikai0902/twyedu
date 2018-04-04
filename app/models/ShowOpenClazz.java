@@ -54,12 +54,13 @@ public class ShowOpenClazz extends BaseModel{
 
 
 
-    public static ShowOpenClazz addLink(String name, String link,String imgUrl){
+    public static ShowOpenClazz addLink(String name, String link,String imgUrl,String remark){
         ShowOpenClazz showOpenClazz = new ShowOpenClazz();
         showOpenClazz.name = name;
         showOpenClazz.link = link;
         showOpenClazz.type = "2";
         showOpenClazz.imgUrl = imgUrl;
+        showOpenClazz.remark =remark;
         return showOpenClazz.save();
     }
 
@@ -76,10 +77,11 @@ public class ShowOpenClazz extends BaseModel{
 
 
 
-    public void editLink(String name,String link,String imgUrl){
+    public void editLink(String name,String link,String imgUrl,String remark){
         this.name = name;
         this.link = link;
         this.imgUrl = imgUrl;
+        this.remark = remark;
         this.save();
     }
 

@@ -45,12 +45,13 @@ public class News extends BaseModel{
 
 
 
-    public static News addLink(String name, String link,String imgUrl){
+    public static News addLink(String name, String link,String imgUrl,String remark){
         News news = new News();
         news.name = name;
         news.link = link;
         news.type = "2";
         news.imgUrl = imgUrl;
+        news.remark = remark;
         return news.save();
     }
 
@@ -67,10 +68,11 @@ public class News extends BaseModel{
 
 
 
-    public void editLink(String name,String link,String imgUrl){
+    public void editLink(String name,String link,String imgUrl,String remark){
         this.name = name;
         this.link = link;
         this.imgUrl = imgUrl;
+        this.remark = remark;
         this.save();
     }
 

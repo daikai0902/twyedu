@@ -199,8 +199,8 @@ public class APIController extends BaseController{
      * 新增活动链接
      * @Date: 16:18 2018/3/17
      */
-    public static void addActivityLink(String name,String link,String imgUrl){
-        Activity activity =  Activity.addLink(name, link,imgUrl);
+    public static void addActivityLink(String name,String link,String imgUrl,String remark){
+        Activity activity =  Activity.addLink(name, link,imgUrl,remark);
         renderJSON(Result.succeed(new ActivityVO(activity)));
     }
 
@@ -234,9 +234,9 @@ public class APIController extends BaseController{
      * 编辑活动链接
      * @Date: 16:18 2018/3/17
      */
-    public static void editActivityLink(Long activityId,String name,String link,String imgUrl){
+    public static void editActivityLink(Long activityId,String name,String link,String imgUrl,String remark){
         Activity activity = Activity.findById(activityId);
-        activity.editLink(name,link,imgUrl);
+        activity.editLink(name,link,imgUrl,remark);
         renderJSON(Result.succeed(new ActivityVO(activity)));
     }
 
@@ -323,8 +323,8 @@ public class APIController extends BaseController{
 
 
 
-    public static void addShowOpenClazzLink(String name,String link,String imgUrl){
-        ShowOpenClazz showOpenClazz =  ShowOpenClazz.addLink(name, link,imgUrl);
+    public static void addShowOpenClazzLink(String name,String link,String imgUrl,String remark){
+        ShowOpenClazz showOpenClazz =  ShowOpenClazz.addLink(name, link,imgUrl,remark);
         renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
     }
 
@@ -343,9 +343,9 @@ public class APIController extends BaseController{
     }
 
 
-    public static void editShowOpenClazzLink(Long showId,String name,String link,String imgUrl){
+    public static void editShowOpenClazzLink(Long showId,String name,String link,String imgUrl,String remark){
         ShowOpenClazz showOpenClazz = ShowOpenClazz.findById(showId);
-        showOpenClazz.editLink(name,link,imgUrl);
+        showOpenClazz.editLink(name,link,imgUrl,remark);
         renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
     }
 
@@ -399,8 +399,8 @@ public class APIController extends BaseController{
      * 新增新闻链接
      * @Date: 16:18 2018/3/17
      */
-    public static void addNewsLink(String name,String link,String imgUrl){
-        News news =  News.addLink(name, link,imgUrl);
+    public static void addNewsLink(String name,String link,String imgUrl,String remark){
+        News news =  News.addLink(name, link,imgUrl,remark);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 
@@ -434,9 +434,9 @@ public class APIController extends BaseController{
      * 编辑新闻链接
      * @Date: 16:18 2018/3/17
      */
-    public static void editNewsLink(Long newsId,String name,String link,String imgUrl){
+    public static void editNewsLink(Long newsId,String name,String link,String imgUrl,String remark){
         News news = News.findById(newsId);
-        news.editLink(name,link,imgUrl);
+        news.editLink(name,link,imgUrl,remark);
         renderJSON(Result.succeed(new NewsVO(news)));
     }
 

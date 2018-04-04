@@ -52,12 +52,13 @@ public class Activity extends BaseModel{
 
 
 
-    public static Activity addLink(String name,String link,String imgUrl){
+    public static Activity addLink(String name,String link,String imgUrl,String remark){
         Activity activity = new Activity();
         activity.name = name;
         activity.link = link;
         activity.type = "2";
         activity.imgUrl = imgUrl;
+        activity.remark = remark;
         return activity.save();
     }
 
@@ -76,10 +77,11 @@ public class Activity extends BaseModel{
 
 
 
-    public void editLink(String name,String link,String imgUrl){
+    public void editLink(String name,String link,String imgUrl,String remark){
         this.name = name;
         this.link = link;
         this.imgUrl = imgUrl;
+        this.remark = remark;
         this.save();
     }
 

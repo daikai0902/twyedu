@@ -78,7 +78,7 @@ public class Student extends WePerson {
 
 
 	public static Student findByNum(String number){
-		return find(getDefaultContitionSql(" number = ? ")).first();
+		return find(getDefaultContitionSql(" number = ? "),number).first();
 	}
 
 

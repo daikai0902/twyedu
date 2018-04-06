@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class WeChatUtils {
 
-    public static final   String APPLICATION_URL ="http://twyxedu.com";
+    public static final   String APPLICATION_URL ="http://api.twyxedu.com";
 
     public static  final  String appId = "wx959b4c6d0334b80c";
 

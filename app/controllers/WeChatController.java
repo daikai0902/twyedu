@@ -61,6 +61,9 @@ public class WeChatController extends BaseController{
         WeChatMember chatMember =WeChatMember.findByOpenId(openId);
         if(chatMember != null){
             if(StringUtils.isNotBlank(chatMember.studentIds)){
+                if(chatMember.studentIds.contains(student.id+"")){
+                    renderJSON(Result.succeed(new WeChatMemberVO(chatMember)));
+                }
                 String studentIds = chatMember.studentIds+","+student.id;
                 chatMember.setStudentIds(studentIds);
             }else {

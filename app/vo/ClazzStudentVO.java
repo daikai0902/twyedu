@@ -56,6 +56,12 @@ public class ClazzStudentVO extends OneData {
 
     public Long studentId;
 
+    public String clazzName;
+
+    public String courseName;
+
+
+
 
 
 
@@ -81,6 +87,8 @@ public class ClazzStudentVO extends OneData {
         this.dadname = clazzStudent.student.dadname;
         this.dadphone = clazzStudent.student.dadphone;
         this.nursery = clazzStudent.student.nursery;
+        this.clazzName = clazzStudent.clazz.name;
+        this.courseName = clazzStudent.clazz.course.name;
         this.arrive = formatArrive(clazzStudent.arrive)+"/"+clazzStudent.clazz.num;
         this.arriveDetail = clazzStudent.arrive;
         this.reportStatus = Report.findByStudent(clazzStudent.student) == null?"":Report.findByStudent(clazzStudent.student).status.toString();

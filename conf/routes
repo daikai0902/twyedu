@@ -86,6 +86,7 @@ POST    /api/student/add                        APIController.addStudent
 *       /api/course/student/contactstatus        APIController.editContactStatus
 
 *       /api/student/arrive                      APIController.arrive
+*       /api/student/arrive/info                 APIController.arriveInfo
 *       /api/student/report                      APIController.report
 *       /api/student/report/edit                 APIController.saveReport
 *       /api/student/report/send                 APIController.sendReport

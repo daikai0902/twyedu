@@ -35,10 +35,10 @@ public class OrderResult extends OneData{
 
 
     public static OrderResult unifeOrder(String goodsName, Integer price,String tradeNum,
-                                         String currentURL, String trade_type) {
+                                         String currentURL, String trade_type,String openId) {
         String noceStr = WeChatUtils.getNonceStr();
         long timestatm = System.currentTimeMillis() / 1000;
-        OrderResult result = WeChatUtils.unifieOrder(noceStr, goodsName, tradeNum, price + "", ComUtils.getIP(),trade_type, ComUtils.getCurrentOpendId());
+        OrderResult result = WeChatUtils.unifieOrder(noceStr, goodsName, tradeNum, price + "", ComUtils.getIP(),trade_type, openId);
         if (result != null && result.return_code.equals("SUCCESS")
                 && result.result_code.equals("SUCCESS")) {
             result.noceStr = noceStr;

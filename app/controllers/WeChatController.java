@@ -53,6 +53,19 @@ public class WeChatController extends BaseController{
 
 
 
+    /**
+     * 获取学生信息
+     * @Date: 22:07 2018/4/7
+     */
+    public static void students(String openId){
+        WeChatMember chatMember =WeChatMember.findByOpenId(openId);
+        if(chatMember != null){
+            renderJSON(Result.succeed(new WeChatMemberVO(chatMember)));
+        }
+    }
+
+
+
     public  static void bindStudent(String openId,String number){
         Student student =Student.findByNum(number);
         if(student == null){

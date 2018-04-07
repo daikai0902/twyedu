@@ -836,6 +836,7 @@ public class APIController extends BaseController{
      * 点到详情
      * @Date: 00:49 2018/4/7
      */
+    @Deprecated
     public static void arriveInfo(Long studentId){
         ClazzStudent clazzStudent = ClazzStudent.findByStudent(studentId);
         renderJSON(Result.succeed(new ClazzStudentVO(clazzStudent)));

@@ -357,6 +357,13 @@ public class APIController extends BaseController{
 
 
 
+    public static void showOpenClazzDetail(Long showId){
+        ShowOpenClazz showOpenClazz = ShowOpenClazz.findById(showId);
+        renderJSON(Result.succeed(new ShowOpenClazzVO(showOpenClazz)));
+    }
+
+
+
 
     public static void addShowCourse(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro){
         ShowCourse showCourse =  ShowCourse.add(name,coverUrl,age,zc,ksl,sc,intro);

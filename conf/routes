@@ -36,6 +36,7 @@ POST    /api/show/clazz/del                     APIController.delShowOpenClazz
 POST    /api/show/clazz/edit                    APIController.editShowOpenClazz
 POST    /api/show/clazz/link/edit               APIController.editShowOpenClazzLink
 *       /api/show/clazz/list                    APIController.showOpenClazzList
+*       /api/show/clazz/detail                  APIController.showOpenClazzDetail
 
 
 POST    /api/show/course/add                    APIController.addShowCourse

@@ -64,7 +64,14 @@ public class ShowCourse extends BaseModel{
     }
 
 
+    public static List<ShowCourse> fetchAllBySize(int page,int size){
+        return ShowCourse.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch(page,size);
+    }
 
+
+    public static Long countAll(){
+        return count(getDefaultContitionSql(" 1= 1"));
+    }
 
 
 

@@ -91,6 +91,16 @@ public class Activity extends BaseModel{
         return Activity.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch();
     }
 
+    public static List<Activity> fetchAllBySize(int page,int size){
+        return Activity.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch(page,size);
+    }
+
+
+    public static Long countAll(){
+        return count(getDefaultContitionSql(" 1= 1"));
+    }
+
+
 }
 
 

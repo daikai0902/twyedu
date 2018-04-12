@@ -92,6 +92,15 @@ public class ShowOpenClazz extends BaseModel{
     }
 
 
+    public static List<ShowOpenClazz> fetchAllBySize(int page,int size){
+        return ShowOpenClazz.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch(page,size);
+    }
+
+
+    public static Long countAll(){
+        return count(getDefaultContitionSql(" 1= 1"));
+    }
+
 
 
 

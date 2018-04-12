@@ -247,9 +247,12 @@ public class APIController extends BaseController{
      * 活动列表
      * @Date: 16:18 2018/3/17
      */
-    public static void activityList(){
-        List<Activity> activities = Activity.fetchAll();
-        renderJSON(Result.succeed(new PageData(ActivityVO.list(activities))));
+    public static void activityList(Integer page,Integer pageSize){
+        pageSize = pageSize == null?10:pageSize;
+        page = page==null?1:page;
+        Long total = Activity.countAll();
+        List<Activity> activities = Activity.fetchAllBySize(page,pageSize);
+        renderJSON(Result.succeed(new PageData(page,pageSize,total.intValue(),ActivityVO.list(activities))));
     }
 
 
@@ -350,9 +353,12 @@ public class APIController extends BaseController{
     }
 
 
-    public static void showOpenClazzList(){
-        List<ShowOpenClazz> showOpenClazzes = ShowOpenClazz.fetchAll();
-        renderJSON(Result.succeed(new PageData(ShowOpenClazzVO.list(showOpenClazzes))));
+    public static void showOpenClazzList(Integer page,Integer pageSize){
+        pageSize = pageSize == null?10:pageSize;
+        page = page==null?1:page;
+        Long total = ShowOpenClazz.countAll();
+        List<ShowOpenClazz> showOpenClazzes = ShowOpenClazz.fetchAllBySize(page,pageSize);
+        renderJSON(Result.succeed(new PageData(page,pageSize,total.intValue(),ShowOpenClazzVO.list(showOpenClazzes))));
     }
 
 
@@ -386,9 +392,12 @@ public class APIController extends BaseController{
     }
 
 
-    public static void showCourseList(){
-        List<ShowCourse> showCourses = ShowCourse.fetchAll();
-        renderJSON(Result.succeed(new PageData(ShowCourseVO.list(showCourses))));
+    public static void showCourseList(Integer page,Integer pageSize){
+        pageSize = pageSize == null?10:pageSize;
+        page = page==null?1:page;
+        Long total = ShowCourse.countAll();
+        List<ShowCourse> showCourses = ShowCourse.fetchAllBySize(page,pageSize);
+        renderJSON(Result.succeed(new PageData(page,pageSize,total.intValue(),ShowCourseVO.list(showCourses))));
     }
 
 

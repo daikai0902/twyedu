@@ -7,6 +7,7 @@ public class PageData extends Data {
 	public int page;
 	public int size;
 	public int totalPage;
+	public int total;
 
 	public List<? extends OneData> array;
 
@@ -25,6 +26,7 @@ public class PageData extends Data {
 		this.page = page;
 		this.size = size;
 		this.totalPage = (total - 1) / size + 1;
+		this.total = total;
 		this.array = array;
 	}
 

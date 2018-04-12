@@ -82,6 +82,16 @@ public class News extends BaseModel{
         return News.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch();
     }
 
+
+    public static List<News> fetchAllBySize(int page,int size){
+        return News.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch(page, size);
+    }
+
+
+
+    public static Long countAll(){
+        return count(getDefaultContitionSql(" 1=1 "));
+    }
 }
 
 

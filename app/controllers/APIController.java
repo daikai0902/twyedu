@@ -454,9 +454,11 @@ public class APIController extends BaseController{
      * 新闻列表
      * @Date: 16:18 2018/3/17
      */
-    public static void newsList(){
-        List<News> newsList = News.fetchAll();
-        renderJSON(Result.succeed(new PageData(NewsVO.list(newsList))));
+    public static void newsList(Integer page){
+        page = page==null?1:page;
+        Long total = News.countAll();
+        List<News> newsList = News.fetchAllBySize(page,10);
+        renderJSON(Result.succeed(new PageData(page,10,total.intValue(),NewsVO.list(newsList))));
     }
 
 

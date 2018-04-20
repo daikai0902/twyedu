@@ -54,7 +54,7 @@ public class Clazz extends BaseModel {
 
 
     public static  Long countClazzsByTeachers(Teacher teacher){
-        return count(getDefaultContitionSql(" teacherA = ?  "),teacher)+count(getDefaultContitionSql(" teacherB = ?  "),teacher);
+        return count(getDefaultContitionSql(" teacherA = ? and  teacherA != teacherB "),teacher)+count(getDefaultContitionSql(" teacherB = ?  "),teacher);
     }
 
 

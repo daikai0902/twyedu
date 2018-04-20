@@ -102,13 +102,14 @@ public class ClazzStudentVO extends OneData {
         if(StringUtils.isBlank(arrive)){
             return "0";
         }
-        int count = 0 ;
-        for(int i=0;i<arrive.length();i++){
-            if(arrive.charAt(i) == '1'){
-                count++;
-            }
-        }
-        return count+"";
+//        int count = 0 ;
+//        for(int i=0;i<arrive.length();i++){
+//            if(arrive.charAt(i) == '1'){
+//                count++;
+//            }
+//        }
+//        return count+"";
+        return arrive.length()+"";
     }
 
 

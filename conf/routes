@@ -92,7 +92,6 @@ POST    /api/student/add                        APIController.addStudent
 *       /api/student/report/edit                 APIController.saveReport
 *       /api/student/report/send                 APIController.sendReport
 
-*       /api/student/mobile/report               APIController.mobileReport
 
 
 *       /api/org/courses                         APIController.getCourses

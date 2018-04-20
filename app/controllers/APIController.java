@@ -851,13 +851,13 @@ public class APIController extends BaseController{
     }
 
 
-    public static void mobileReport(Long studentId){
-        Report  report = Report.findByStudent(Student.findById(studentId));
-        if(!report.status.equals(Report.Status.已完成)){
-            renderJSON(Result.failed(Result.StatusCode.REPORT_NOT_EXITS));
-        }
-        renderJSON(Result.succeed(new ReportVO(report,true)));
-    }
+//    public static void mobileReport(Long studentId){
+//        Report  report = Report.findByStudent(Student.findById(studentId));
+//        if(!report.status.equals(Report.Status.已完成)){
+//            renderJSON(Result.failed(Result.StatusCode.REPORT_NOT_EXITS));
+//        }
+//        renderJSON(Result.succeed(new ReportVO(report)));
+//    }
 
 
     /**

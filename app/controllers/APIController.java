@@ -661,8 +661,8 @@ public class APIController extends BaseController{
     public static void editClazz(Long clazzId,String name,Long courseId,Long teacherAId,
                                     Long teacherBId,String num,String time,String duration){
         Clazz clazz = Clazz.findById(clazzId);
-        clazz.edit(name,Course.findById(courseId),Teacher.findById(teacherAId),
-                Teacher.findById(teacherBId),num,time,duration);
+        clazz.edit(name,Course.findById(courseId),teacherAId == null?null:Teacher.findById(teacherAId),
+                teacherBId == null?null:Teacher.findById(teacherBId),num,time,duration);
         renderJSON(Result.succeed(new ClazzVO(clazz)));
     }
 

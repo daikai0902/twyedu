@@ -45,6 +45,8 @@ public class Student extends WePerson {
 		student.nursery = nursery;
 		student.address = address;
 		student.remark = remark;
+		student.save();
+		student.number = ComUtils.formatDate(student.createTime,"yyMMdd")+new DecimalFormat("00000").format(student.id);
 		return student.save();
 
 

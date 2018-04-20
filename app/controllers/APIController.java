@@ -624,8 +624,8 @@ public class APIController extends BaseController{
      * @Date: 21:49 2018/3/22
      */
     public static void addClazz(String name,Long courseId,Long teacherAId,Long teacherBId,String num,String time,String duration){
-        Clazz clazz = Clazz.add(name,Course.findById(courseId),Teacher.findById(teacherAId),
-                    Teacher.findById(teacherBId),num,time,duration);
+        Clazz clazz = Clazz.add(name,Course.findById(courseId),teacherAId == null?null:Teacher.findById(teacherAId),
+                teacherBId == null?null:Teacher.findById(teacherBId),num,time,duration);
         renderJSON(Result.succeed(new ClazzVO(clazz)));
     }
 

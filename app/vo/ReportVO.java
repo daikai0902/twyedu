@@ -62,6 +62,11 @@ public class ReportVO extends OneData {
         this.clazzName  = ClazzStudent.findByStudent(report.student.id).clazz.name;
         this.studentNum = report.student.number;
         this.studentId = report.student.id;
+        this.comment = report.comment;
+        this.starComment = report.starComment;
+        this.status = report.status.toString();
+        this.imgUrls = report.imgUrls;
+        this.isSend = report.isSend;
     }
 
 

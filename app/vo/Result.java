@@ -42,6 +42,7 @@ public class Result {
 		public static final Object[] REPORT_NOT_FINISH = { 50007, "还有报告未完成" };
 		public static final Object[] NULL_WX_CODE = { 50008, "微信认证code为空" };
 		public static final Object[] STUDENT_NOT_EXITS = { 50009, "学生不存在" };
+		public static final Object[] REPORT_NOT_EXITS = { 50010, "报告未发布无权查看" };
 	}
 
 	public Result() {

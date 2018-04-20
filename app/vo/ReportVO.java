@@ -54,5 +54,14 @@ public class ReportVO extends OneData {
     }
 
 
+    public ReportVO(Report report,boolean ismobile){
+        this.id = report.id;
+        this.studentName = report.student.name;
+        this.clazzName  = ClazzStudent.findByStudent(report.student.id).clazz.name;
+        this.studentNum = report.student.number;
+        this.studentId = report.student.id;
+    }
+
+
 
 }

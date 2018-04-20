@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @autor kevin.dai
@@ -47,7 +48,7 @@ public class Clazz extends BaseModel {
         List<Clazz> list2 = find(getDefaultContitionSql(" teacherB = ? "),teacher).fetch();
         list.addAll(list1);
         list.addAll(list2);
-        return  list;
+        return  list.stream().distinct().collect(Collectors.toList());
     }
 
 

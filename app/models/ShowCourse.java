@@ -33,8 +33,10 @@ public class ShowCourse extends BaseModel{
     @Lob
     public String intro;
 
+    public String imgUrl;
 
-    public static ShowCourse add(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro){
+
+    public static ShowCourse add(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl){
         ShowCourse showCourse = new ShowCourse();
         showCourse.name = name;
         showCourse.coverUrl = coverUrl;
@@ -43,11 +45,12 @@ public class ShowCourse extends BaseModel{
         showCourse.ksl = ksl;
         showCourse.sc  = sc;
         showCourse.intro = intro;
+        showCourse.imgUrl = imgUrl;
         return showCourse.save();
     }
 
 
-    public void edit(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro){
+    public void edit(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl){
         this.name = name;
         this.coverUrl = coverUrl;
         this.age = age;
@@ -55,6 +58,7 @@ public class ShowCourse extends BaseModel{
         this.ksl = ksl;
         this.sc = sc;
         this.intro = intro;
+        this.imgUrl = imgUrl;
         this.save();
     }
 

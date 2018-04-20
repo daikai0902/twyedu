@@ -371,8 +371,8 @@ public class APIController extends BaseController{
 
 
 
-    public static void addShowCourse(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro){
-        ShowCourse showCourse =  ShowCourse.add(name,coverUrl,age,zc,ksl,sc,intro);
+    public static void addShowCourse(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl){
+        ShowCourse showCourse =  ShowCourse.add(name,coverUrl,age,zc,ksl,sc,intro,imgUrl);
         renderJSON(Result.succeed(new ShowCourseVO(showCourse)));
     }
 
@@ -385,9 +385,9 @@ public class APIController extends BaseController{
     }
 
 
-    public static void editShowCourse(Long showId,String name,String coverUrl,String age,String zc,String ksl,String sc,String intro){
+    public static void editShowCourse(Long showId,String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl){
         ShowCourse showCourse = ShowCourse.findById(showId);
-        showCourse.edit(name,coverUrl,age,zc,ksl,sc,intro);
+        showCourse.edit(name,coverUrl,age,zc,ksl,sc,intro,imgUrl);
         renderJSON(Result.succeed(new ShowCourseVO(showCourse)));
     }
 

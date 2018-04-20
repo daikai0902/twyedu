@@ -32,7 +32,7 @@ public class ClazzStudent extends BaseModel {
 
 
     public static Long countStudent(Clazz clazz){
-        return find(" select count(cs) from ClazzStudent cs where cs.clazz.isDeleted = 0 and cs.student.isDeleted = 0 and cs.clazz  = ? ",clazz).first();
+        return find(" select count(cs) from ClazzStudent cs where cs.isDeleted = 0 and cs.clazz.isDeleted = 0 and cs.student.isDeleted = 0 and cs.clazz  = ? ",clazz).first();
     }
 
 

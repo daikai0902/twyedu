@@ -103,8 +103,8 @@ public class ClazzStudentVO extends OneData {
             return "0";
         }
         int count = 0 ;
-        for(String s : arrive.split(",")){
-            if(s.equals("1")){
+        for(int i=0;i<arrive.length();i++){
+            if(arrive.charAt(i) == '1'){
                 count++;
             }
         }

@@ -20,7 +20,7 @@ public class ClazzStudent extends BaseModel {
     public Student student;
 
 
-    public String arrive;//点到情况:"1,1,1,0"
+    public String arrive;//点到情况:"1110"
 
 
     public static ClazzStudent add(Clazz clazz,Student student){

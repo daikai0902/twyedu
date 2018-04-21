@@ -273,8 +273,8 @@ public class APIController extends BaseController{
      * 名师新增
      * @Date: 16:18 2018/3/17
      */
-    public static void addShowTeachers(String name,String imgUrl,String job,String intro){
-        ShowTeachers showTeachers = ShowTeachers.add(name,imgUrl,job,intro);
+    public static void addShowTeachers(String name,String imgUrl,String job,String intro,String listimgUrl,String pcimgUrl){
+        ShowTeachers showTeachers = ShowTeachers.add(name,imgUrl,job,intro,listimgUrl,pcimgUrl);
         renderJSON(Result.succeed(new ShowTeachersVO(showTeachers)));
     }
 
@@ -294,9 +294,9 @@ public class APIController extends BaseController{
      * 名师编辑
      * @Date: 16:18 2018/3/17
      */
-    public static void editShowTeachers(Long showId,String name,String imgUrl,String job,String intro){
+    public static void editShowTeachers(Long showId,String name,String imgUrl,String job,String intro,String listimgUrl,String pcimgUrl){
         ShowTeachers showTeachers = ShowTeachers.findById(showId);
-        showTeachers.edit(name,imgUrl,job,intro);
+        showTeachers.edit(name,imgUrl,job,intro,listimgUrl,pcimgUrl);
         renderJSON(Result.succeed(new ShowTeachersVO(showTeachers)));
     }
 

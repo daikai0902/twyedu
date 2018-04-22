@@ -21,6 +21,10 @@ public class ShowTeachersVO extends OneData{
 
     public String intro;//介绍
 
+    public String listimgUrl;
+
+    public String pcimgUrl;
+
 
     public ShowTeachersVO(){
 
@@ -34,6 +38,8 @@ public class ShowTeachersVO extends OneData{
         this.imgUrl = showTeachers.imgUrl;
         this.job = showTeachers.job;
         this.intro = showTeachers.intro;
+        this.listimgUrl = showTeachers.listimgUrl;
+        this.pcimgUrl = showTeachers.pcimgUrl;
     }
 
 

@@ -302,6 +302,14 @@ public class APIController extends BaseController{
 
 
 
+    public static void editShowTeacherNum(Long showId,int num){
+        ShowTeachers showTeachers = ShowTeachers.findById(showId);
+        showTeachers.setNum(num);
+        renderJSON(Result.succeed(new ShowTeachersVO(showTeachers)));
+    }
+
+
+
     /**
      * 名师列表
      * @Date: 16:18 2018/3/17

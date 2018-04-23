@@ -27,6 +27,9 @@ public class ShowTeachers extends BaseModel{
     public String intro;//介绍
 
 
+    public Integer num;
+
+
 
     public static ShowTeachers add(String name,String imgUrl,String job,String intro,String listimgUrl,String pcimgUrl){
         ShowTeachers showTeachers = new ShowTeachers();
@@ -51,8 +54,14 @@ public class ShowTeachers extends BaseModel{
     }
 
 
+    public void setNum(int num){
+        this.num = num;
+        this.save();
+    }
+
+
     public static List<ShowTeachers> fetchAll(){
-        return ShowTeachers.find(defaultCondition()).fetch();
+        return ShowTeachers.find(getDefaultContitionSql(" 1=1 order by num ")).fetch();
     }
 
 

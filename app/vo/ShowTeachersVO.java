@@ -25,6 +25,8 @@ public class ShowTeachersVO extends OneData{
 
     public String pcimgUrl;
 
+    public Integer num;
+
 
     public ShowTeachersVO(){
 
@@ -40,6 +42,7 @@ public class ShowTeachersVO extends OneData{
         this.intro = showTeachers.intro;
         this.listimgUrl = showTeachers.listimgUrl;
         this.pcimgUrl = showTeachers.pcimgUrl;
+        this.num = showTeachers.num;
     }
 
 

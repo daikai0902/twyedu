@@ -48,7 +48,7 @@ POST    /api/show/teacher/add                   APIController.addShowTeachers
 GET     /api/show/teacher/list                  APIController.showTeachersList
 POST    /api/show/teacher/del                   APIController.delShowTeachers
 POST    /api/show/teacher/edit                  APIController.editShowTeachers
-
+POST    /api/show/teacher/num/edit              APIController.editShowTeacherNum
 
 
 *       /api/org/info                           APIController.getOrgInfo

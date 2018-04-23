@@ -22,6 +22,8 @@ public class ShowTeachers extends BaseModel{
     @Lob
     public String job;
 
+
+    @Lob
     public String intro;//介绍
 
 

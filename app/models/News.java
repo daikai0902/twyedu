@@ -22,6 +22,7 @@ public class News extends BaseModel{
 
     public String videoUrl;
 
+    @Lob
     public String link;
 
     public String type;//"1:普通 2:链接"

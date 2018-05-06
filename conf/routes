@@ -95,7 +95,7 @@ POST    /api/student/add                        APIController.addStudent
 
 
 *       /api/org/courses                         APIController.getCourses
-
+*       /api/person/token                        APIController.getPersonInfoByToken
 
 
 *       /api/{action}                           APIController.{action}

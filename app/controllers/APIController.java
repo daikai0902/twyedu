@@ -89,6 +89,17 @@ public class APIController extends BaseController{
     //************************后台***************************
 
 
+
+    public static void  getPersonInfoByToken(String accesstoken){
+       AccessToken accessToken = AccessToken.findByAccessToken(accesstoken);
+       if(accessToken != null){
+           WePerson person = accessToken.person;
+           renderJSON(Result.succeed(new WePersonVO(person)));
+       }
+        renderJSON(Result.failed(Result.StatusCode.SYSTEM_TOKEN_UNVALID));
+    }
+
+
     /**
      * 登录
      * @Date: 14:14 2018/3/17

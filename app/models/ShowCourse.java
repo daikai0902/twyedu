@@ -35,6 +35,8 @@ public class ShowCourse extends BaseModel{
 
     public String imgUrl;
 
+    public Integer num;
+
 
     public static ShowCourse add(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl){
         ShowCourse showCourse = new ShowCourse();
@@ -63,13 +65,18 @@ public class ShowCourse extends BaseModel{
     }
 
 
+    public void setNum(int num){
+        this.num = num;
+        this.save();
+    }
+
     public static List<ShowCourse> fetchAll(){
-        return ShowCourse.find(defaultCondition()).fetch();
+        return ShowCourse.find(getDefaultContitionSql(" 1=1 order by num ")).fetch();
     }
 
 
     public static List<ShowCourse> fetchAllBySize(int page,int size){
-        return ShowCourse.find(getDefaultContitionSql(" 1=1 order by createTime desc ")).fetch(page,size);
+        return ShowCourse.find(getDefaultContitionSql(" 1=1 order by num  ")).fetch(page,size);
     }
 
 

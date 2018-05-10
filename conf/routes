@@ -43,6 +43,7 @@ POST    /api/show/course/add                    APIController.addShowCourse
 POST    /api/show/course/del                    APIController.delShowCourse
 POST    /api/show/course/edit                   APIController.editShowCourse
 *       /api/show/course/list                   APIController.showCourseList
+POST    /api/show/course/num/edit              APIController.editShowCourseNum
 
 POST    /api/show/teacher/add                   APIController.addShowTeachers
 GET     /api/show/teacher/list                  APIController.showTeachersList

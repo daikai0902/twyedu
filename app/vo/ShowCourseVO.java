@@ -34,6 +34,7 @@ public class ShowCourseVO extends OneData{
 
     public String imgUrl;
 
+    public Integer num;
 
     public ShowCourseVO(){
 
@@ -51,6 +52,7 @@ public class ShowCourseVO extends OneData{
         this.sc = showCourse.sc;
         this.intro = showCourse.intro;
         this.imgUrl = showCourse.imgUrl;
+        this.num = showCourse.num;
     }
 
 

@@ -420,6 +420,14 @@ public class APIController extends BaseController{
     }
 
 
+    public static void editShowCourseNum(Long showId,int num){
+        ShowCourse showCourse = ShowCourse.findById(showId);
+        showCourse.setNum(num);
+        renderJSON(Result.succeed(new ShowCourseVO(showCourse)));
+    }
+
+
+
     /**
      * 新增新闻
      * @Date: 16:18 2018/3/17

@@ -390,8 +390,10 @@ public class APIController extends BaseController{
 
 
 
-    public static void addShowCourse(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl){
+    public static void addShowCourse(String name,String coverUrl,String age,String zc,String ksl,String sc,String intro,String imgUrl,Long classifyId){
         ShowCourse showCourse =  ShowCourse.add(name,coverUrl,age,zc,ksl,sc,intro,imgUrl);
+        ShowCourseClassify classify = ShowCourseClassify.findById(classifyId);
+        ShowCourseGroup.add(classify,showCourse);
         renderJSON(Result.succeed(new ShowCourseVO(showCourse)));
     }
 
@@ -426,6 +428,40 @@ public class APIController extends BaseController{
         renderJSON(Result.succeed(new ShowCourseVO(showCourse)));
     }
 
+
+
+    public static void addShowCourseClassify(String name){
+        ShowCourseClassify showCourseClassify =ShowCourseClassify.add(name);
+        renderJSON(Result.succeed(new ShowCourseClassifyVO(showCourseClassify)));
+    }
+
+
+    public static void editShowCourseClassify(Long classifyId,String name){
+        ShowCourseClassify showCourseClassify = ShowCourseClassify.findById(classifyId);
+        showCourseClassify.editName(name);
+        renderJSON(Result.succeed(new ShowCourseClassifyVO(showCourseClassify)));
+    }
+
+    public static void delShowCourseClassify(Long classifyId){
+        ShowCourseClassify showCourseClassify = ShowCourseClassify.findById(classifyId);
+        showCourseClassify.logicDelete();
+        renderJSON(Result.succeed());
+    }
+
+
+    public static void showCourseClassifyList(){
+        List<ShowCourseClassify> classifies = ShowCourseClassify.findAll();
+        renderJSON(Result.succeed(new PageData(ShowCourseClassifyVO.toList(classifies))));
+    }
+
+
+
+
+    public static void showCoursesByGroup(Long classifyId){
+        ShowCourseClassify classify = ShowCourseClassify.findById(classifyId);
+        List<ShowCourse> courses = ShowCourseGroup.findCourseByClassify(classify);
+        renderJSON(Result.succeed(new PageData(ShowCourseVO.list(courses))));
+    }
 
 
     /**

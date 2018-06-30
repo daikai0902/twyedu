@@ -43,7 +43,22 @@ POST    /api/show/course/add                    APIController.addShowCourse
 POST    /api/show/course/del                    APIController.delShowCourse
 POST    /api/show/course/edit                   APIController.editShowCourse
 *       /api/show/course/list                   APIController.showCourseList
-POST    /api/show/course/num/edit              APIController.editShowCourseNum
+POST    /api/show/course/num/edit               APIController.editShowCourseNum
+*       /api/show/course/classify/add           APIController.addShowCourseClassify
+*       /api/show/course/classify/edit           APIController.editShowCourseClassify
+*       /api/show/course/classify/del           APIController.delShowCourseClassify
+*       /api/show/course/classify/list           APIController.showCourseClassifyList
+
+*       /api/show/course/group                  APIController.showCoursesByGroup
+
+
+
+
+
+
+
+
+
 
 POST    /api/show/teacher/add                   APIController.addShowTeachers
 GET     /api/show/teacher/list                  APIController.showTeachersList

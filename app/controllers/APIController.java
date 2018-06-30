@@ -457,10 +457,13 @@ public class APIController extends BaseController{
 
 
 
-    public static void showCoursesByGroup(Long classifyId){
+    public static void showCoursesByGroup(Long classifyId,Integer page,Integer pageSize){
+        pageSize = pageSize == null?10:pageSize;
+        page = page==null?1:page;
         ShowCourseClassify classify = ShowCourseClassify.findById(classifyId);
-        List<ShowCourse> courses = ShowCourseGroup.findCourseByClassify(classify);
-        renderJSON(Result.succeed(new PageData(ShowCourseVO.list(courses))));
+        Long total = ShowCourseGroup.countCourseByClassify(classify);
+        List<ShowCourse> courses = ShowCourseGroup.findCourseByClassify(classify,page,pageSize);
+        renderJSON(Result.succeed(new PageData(page,pageSize,total.intValue(),ShowCourseVO.list(courses))));
     }
 
 

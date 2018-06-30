@@ -26,12 +26,17 @@ public class ShowCourseGroup extends BaseModel{
     }
 
 
-    public static List<ShowCourse> findCourseByClassify(ShowCourseClassify classify){
+    public static List<ShowCourse> findCourseByClassify(ShowCourseClassify classify,int page,int pageSize){
         return find("select sg.course from ShowCourseGroup sg where sg.isDeleted =0 and" +
-                " sg.course.isDeleted = 0 and sg.classify.isDeleted = 0 and sg.classify = ? ",classify).fetch();
+                " sg.course.isDeleted = 0 and sg.classify.isDeleted = 0 and sg.classify = ? ",classify).fetch(page,pageSize);
     }
 
 
+
+    public static Long countCourseByClassify(ShowCourseClassify classify){
+        return find("select count(sg.course) from ShowCourseGroup sg where sg.isDeleted =0 and" +
+                " sg.course.isDeleted = 0 and sg.classify.isDeleted = 0 and sg.classify = ? ",classify).first();
+    }
 
 
 }

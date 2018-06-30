@@ -28,7 +28,7 @@ public class ShowCourseClassify extends BaseModel {
 
 
 
-    public static  List<ShowCourseClassify> findAll(){
+    public static  List<ShowCourseClassify> findAllClassify(){
         return ShowCourseClassify.find(getDefaultContitionSql("1=1  ")).fetch();
     }
 

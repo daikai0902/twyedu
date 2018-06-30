@@ -450,7 +450,7 @@ public class APIController extends BaseController{
 
 
     public static void showCourseClassifyList(){
-        List<ShowCourseClassify> classifies = ShowCourseClassify.findAll();
+        List<ShowCourseClassify> classifies = ShowCourseClassify.findAllClassify();
         renderJSON(Result.succeed(new PageData(ShowCourseClassifyVO.toList(classifies))));
     }
 

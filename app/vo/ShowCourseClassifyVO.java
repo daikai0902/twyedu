@@ -1,6 +1,7 @@
 package vo;
 
 import models.ShowCourseClassify;
+import models.ShowCourseGroup;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +15,12 @@ public class ShowCourseClassifyVO extends OneData{
 
     public String name;
 
+    public Long courseNum;
+
     public ShowCourseClassifyVO(ShowCourseClassify showCourseClassify){
         this.name = showCourseClassify.name;
         this.id = showCourseClassify.id;
+        this.courseNum = ShowCourseGroup.countCourseByClassify(showCourseClassify);
     }
 
 

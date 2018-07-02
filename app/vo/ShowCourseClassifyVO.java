@@ -17,10 +17,14 @@ public class ShowCourseClassifyVO extends OneData{
 
     public Long courseNum;
 
+    public String coverUrl;
+
     public ShowCourseClassifyVO(ShowCourseClassify showCourseClassify){
         this.name = showCourseClassify.name;
         this.id = showCourseClassify.id;
         this.courseNum = ShowCourseGroup.countCourseByClassify(showCourseClassify);
+        this.coverUrl = ShowCourseGroup.findCourseByClassify(showCourseClassify,1,1) == null?""
+                :ShowCourseGroup.findCourseByClassify(showCourseClassify,1,1).get(0).coverUrl;
     }
 
 

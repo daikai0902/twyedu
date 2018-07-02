@@ -28,7 +28,7 @@ public class ShowCourseGroup extends BaseModel{
 
     public static List<ShowCourse> findCourseByClassify(ShowCourseClassify classify,int page,int pageSize){
         return find("select sg.course from ShowCourseGroup sg where sg.isDeleted =0 and" +
-                " sg.course.isDeleted = 0 and sg.classify.isDeleted = 0 and sg.classify = ? ",classify).fetch(page,pageSize);
+                " sg.course.isDeleted = 0 and sg.classify.isDeleted = 0 and sg.classify = ? order by sg.createTime desc ",classify).fetch(page,pageSize);
     }
 
 

@@ -116,8 +116,8 @@ public class CourseStudent extends BaseModel{
         }
         if(StringUtils.isNotBlank(age)){
             String[] ages = age.split(",");
-            sb.append(" and cs.student.age > ").append(ages[0]);
-            sb.append(" and cs.student.age < ").append(ages[1]);
+            sb.append(" and cs.student.age >= ").append(ages[0]);
+            sb.append(" and cs.student.age <= ").append(ages[1]);
         }
         if(courseId != null){
             sb.append(" and cs.course.id = ").append(courseId);

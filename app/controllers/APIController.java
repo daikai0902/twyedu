@@ -33,6 +33,8 @@ public class APIController extends BaseController{
     public static final String BASE_URL = Play.configuration.getProperty("application.baseUrl");
 
 
+
+
     /**
      * 公开的网点
      * @Date: 17:59 2018/3/24
@@ -961,12 +963,27 @@ public class APIController extends BaseController{
      * 上传文件
      * @Date: 22:02 2018/3/29
      */
-    public static void upload(File file){
-        URLResult result = PictureUtils.uploadImage(file);
-        if(result == null){
-            renderJSON("上传失败！");
+    public static void upload(File file) throws Exception{
+//        URLResult result = PictureUtils.uploadImage(file);
+//        if(result == null){
+//            renderJSON("上传失败！");
+//        }
+//        renderJSON(result.html);
+
+        String fileName = file.getName();
+        String randomPath = "/upload/"+System.currentTimeMillis()+"/";
+        String path =  System.getProperty("user.dir")+randomPath;
+        File parentFile = new File(path);
+        if(!parentFile.exists()){
+            parentFile.mkdirs();
         }
-        renderJSON(result.html);
+        File dataFile = new File(path+fileName);
+        if(!dataFile.exists()){
+            dataFile.createNewFile();
+        }
+        FileUtils.copyFile(file,dataFile);
+        String url =BASE_URL+randomPath+fileName;
+        renderJSON(url);
     }
 
 

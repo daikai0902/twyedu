@@ -28,7 +28,9 @@ public class WeChatMemberVO extends OneData{
         if(StringUtils.isNotBlank(chatMember.studentIds)){
             for(String s:chatMember.studentIds.split(",")){
                 ClazzStudent clazzStudent = ClazzStudent.findByStudent(Long.valueOf(s));
-                clazzStudents.add(clazzStudent);
+                if(clazzStudent != null){
+                    clazzStudents.add(clazzStudent);
+                }
             }
             this.clazzStudentVOS = ClazzStudentVO.list(clazzStudents);
         }
